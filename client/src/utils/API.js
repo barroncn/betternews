@@ -45,10 +45,10 @@ export default {
 //   getRepRecord: function(id) {
 //       return axios.get("WEBSITENAME");
 //   },
-//   // Gets all Reps by State from database
-//   getStateReps: function(reptype, state) {
-//     return axios.get("/api/reps/" + reptype + "/" + state);
-//   },
+  // Gets all Reps by State from database
+  getStateReps: function(reptype, state) {
+    return axios.get("/api/reps/" + reptype + "/" + state);
+  },
   // Gets all Users from database
   getUsers: function() {
     return axios.get("/api/users");
