@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const repsSchema = new Schema({
   name: { type: String, required: true },
+  reptype: { type: String, required: true },
   party: { type: String, required: true },
   email: String,
   state: { type: String, required: true },

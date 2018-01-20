@@ -33,5 +33,12 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  findRepsbyState: function(req, res) {
+    db.Reps
+      .find({ reptype: req.params.reptype })
+      .where("state").equals(req.params.state)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };

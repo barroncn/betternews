@@ -13,4 +13,9 @@ router
   .put(repsController.update)
   .delete(repsController.remove);
 
+// Matches with "/api/reps/:reptype/:state"
+router
+  .route("/:reptype/:state")
+  .get(repsController.findRepsbyState);
+
 module.exports = router;
