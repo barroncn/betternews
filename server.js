@@ -3,6 +3,7 @@ const path = require("path");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+const routes = require("./routes");
 const PORT = process.env.PORT || 8081;
 const app = express();
 
@@ -25,9 +26,8 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/myreps";
 mongoose.connect(MONGODB_URI);
 mongoose.set('debug', true);
 
-// A GET route for scraping the echojs website
-var routes = require("./controllers/controller.js");
-app.use("/", routes);
+//add routes, both API and view
+app.use(routes);
 
 // Send every request to the React app
 // Define any API routes before this runs
