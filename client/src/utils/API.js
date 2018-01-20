@@ -17,6 +17,10 @@ export default {
   saveArticle: function(articleData) {
     return axios.post("/api/articles", articleData);
   },
+//   //goes to the NewsAPI to get articles
+//   getNewArticles: function() {
+//       return axios.get("WEBSITENAME");
+//   },
   // Gets all Reps from database
   getReps: function() {
     return axios.get("/api/reps");
@@ -33,6 +37,14 @@ export default {
   saveRep: function(repData) {
     return axios.post("/api/reps", repData);
   },
+//   //goes to the Publica website to get all the reps
+//   getNewReps: function() {
+//       return axios.get("WEBSITENAME");
+//   },
+//   //goes to the publica website to get a reps voting record
+//   getRepRecord: function(id) {
+//       return axios.get("WEBSITENAME");
+//   },
   // Gets all Users from database
   getUsers: function() {
     return axios.get("/api/users");
