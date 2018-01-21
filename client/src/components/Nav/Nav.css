@@ -1,0 +1,17 @@
+body {
+    background-image: url("capitolbuilding.jpg");
+}
+
+.navbar-brand {
+    /*margin-left: 20px;*/
+    padding: 10px;
+    vertical-align: middle;
+    margin-top: 20px;
+}
+
+.navbar-end {
+    /*margin-right: 20px;*/
+    margin-left: auto;
+    padding: 6px;
+    text-align: right;
+}

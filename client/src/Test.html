@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!--Bulma CSS Framework-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" type="text/css" />
+  <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+  <title>My Reps</title>
+  <style type="text/css">
+    body {
+      background-image: url("capitolbuilding.jpg");
+    }
+
+    .navbar-brand {
+      /*margin-left: 20px;*/
+      padding: 10px;
+      vertical-align: middle;
+      margin-top: 20px;
+    }
+
+    .navbar-end {
+      /*margin-right: 20px;*/
+      margin-left: auto;
+      padding: 6px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand is-size-3 has-text-weight-semibold">
+        My Reps
+        <div class="is-size-5 has-text-right navbar-item navbar-end has-text-weight-normal">
+          {props.children}
+          <a class="navbar-item" style="display:none">{props.linkone}</a>
+          <a class="navbar-item">{props.linktwo</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</body>
+
+</html>
