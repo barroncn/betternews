@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 const routes = require("./routes");
-const PORT = process.env.PORT || 8081;
+const PORT = 8081; //process.env.PORT || 
 const app = express();
 
 // Use morgan logger for logging requests
@@ -43,4 +43,4 @@ app.listen(PORT, function() {
 // "https://cdn.civil.services/senate/headshots/512x512/" + FIRSTNAMElowercase + "-" + LASTNAMElowercase + ".jpg"
 //HOUSE HEADSHOT
 // "https://vote-usa.org/Image.aspx?Id=" + STATE2LETTABBREV + LASTNAME + FIRSTNAME + "&Col=Profile300&Def=Profile300"
-//                                                      ALRobyMartha 
+//                                                      ALRobyMartha

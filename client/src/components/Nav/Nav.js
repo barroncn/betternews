@@ -1,6 +1,6 @@
 import React from "react";
 
-const Nav = props => {
+const Nav = props =>
     <div className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand is-size-3">
              My Reps 
@@ -11,5 +11,5 @@ const Nav = props => {
               </div>
           </div>
         </div>;
-};
+
 export default Nav;

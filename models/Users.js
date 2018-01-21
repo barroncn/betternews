@@ -19,7 +19,8 @@ const usersSchema = new Schema({
       "Password should be longer."
     ]
   },
-  state: {type: String,
+  state: {
+    type: String,
     trim: true,
     required: "State is Required",
     validate: [
@@ -29,13 +30,11 @@ const usersSchema = new Schema({
       "Use the two letter state abbreviation."
     ]
   },
-  savedArticles: [
-    {
-      type: Schema.Articles.ObjectId,
-      // The ObjectIds will refer to the ids in the Articles model
-      ref: "Articles"
-    }
-  ]
+  savedArticles: [{
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Articles model
+    ref: "Articles"
+  }]
 });
 
 const Users = mongoose.model("Users", usersSchema);
