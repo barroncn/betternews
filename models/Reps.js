@@ -10,6 +10,7 @@ const repsSchema = new Schema({
   website: { type: String, required: true },
   picture: { type: String, required: true },
   telephone: { type: String, required: true },
+  nextRace: String,
   apiID: { type: String, required: true },
 });
 
