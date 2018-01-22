@@ -1,31 +1,16 @@
 .rep {
     max-width: 220px;
     margin: 5px;
-    text-align: center;
+    border: none;
     padding: none;
+    background-color: white;
 }
 
-
-
-/*.card-title,
-*/
-
-/*.cart-text,*/
-
-a,
-p {
-    /*padding: 2px;*/
-    /*margin: 2px;*/
-    color: black;
-    text-align: center;
-}
-
-a {
-    display: block;
-    text-align: center;
+.card {
+    background-color: white;
 }
 
 .rep:hover {
     box-shadow: -7px 11px 25px -9px rgba(0, 0, 0, 1);
-    border-color: black;
+    border: solid darkgray 2px;
 }

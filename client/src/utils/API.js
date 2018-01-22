@@ -46,10 +46,15 @@ export default {
     return axios.get("https://api.propublica.org/congress/v1/115/senate/members.json", config);
 
   },
-  //   //goes to the publica website to get a reps voting record
-  //   getRepRecord: function(id) {
-  //       return axios.get("WEBSITENAME");
-  //   },
+  //goes to the publica website to get a reps voting record
+  getRepRecord: function(id) {
+    var config = {
+      headers: { 'X-API-Key': 'pXokVRTYxVYCKFt7QY6smIfur1w1bT6TNJMybPan' }
+    };
+
+    return axios.get("https://api.propublica.org/congress/v1/members/" + id + "/votes.json", config);
+  },
+
   // Gets all Reps by State from database
   getStateReps: function(reptype, state) {
     return axios.get("/api/reps/" + reptype + "/" + state);
