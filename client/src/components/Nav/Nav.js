@@ -1,15 +1,25 @@
 import React from "react";
+import "./Nav.css";
 
 const Nav = props =>
-    <div className="navbar" role="navigation" aria-label="main navigation">
-          <div className="navbar-brand is-size-3">
-             My Reps 
-             <div className="is-size-5 has-text-right navbar-item navbar-end">
-                {props.message} 
-                <a className="navbar-item">{props.linkone}</a>
-                <a className="navbar-item">{props.linktwo}</a>
-              </div>
-          </div>
-        </div>;
+    <nav class="navbar navbar-expand-lg">
+      <a className="navbar-brand" href="#">My Reps</a>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarText">
+
+        <span className="navbar-text pull-right">
+            <ul className="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a className="nav-link" href="#">{props.linkOneDisplay}</a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#">{props.linkTwoDisplay}</a>
+                </li>
+            </ul>
+        </span>
+      </div>
+    </nav>;
 
 export default Nav;

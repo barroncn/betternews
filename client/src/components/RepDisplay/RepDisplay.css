@@ -1,0 +1,23 @@
+button {
+    margin: 10px;
+}
+
+.jumbotron {
+    text-align: center;
+    padding: 10px;
+    background: none;
+}
+
+.scrollwrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.card-deck {
+    flex: 0 0 auto;
+}
+
+.btn-dark {
+    margin: 20px;
+}
