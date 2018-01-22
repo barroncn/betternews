@@ -1,0 +1,10 @@
+a {
+    color: black;
+}
+
+.article {
+    width: 90vw;
+    margin: auto;
+    text-align: left;
+    margin-bottom: 10px;
+}
