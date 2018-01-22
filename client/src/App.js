@@ -6,7 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Voting from "./pages/Voting";
-import Nav from "./components/Nav";
+import "./App.css";
 
 const App = () =>
   <Router>
