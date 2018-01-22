@@ -22,7 +22,7 @@ const Login = props => [
             <label for="passwordInput">Password</label>
             <input type="password" className="form-control" id="passwordInput" placeholder="Password" />
           </div>
-          <button type="submit" className="btn btn-dark">Submit</button>
+          <button type="submit" className="btn btn-dark">Submit</button><span>Don't have an account yet? <a href="/register">Register</a></span>
         </form>
       </div>
     </div>

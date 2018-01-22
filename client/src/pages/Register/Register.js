@@ -86,7 +86,7 @@ const Register = props => [
                         <label for="inputZip">Zip</label>
                         <input type="text" class="form-control" id="inputZip" />
                     </div>
-                    <button type="submit" className="btn btn-dark">Submit</button>
+                    <button type="submit" className="btn btn-dark">Submit</button><span>Already have an account? <a href="/login">Login</a></span>
 
                     
                 </form>
