@@ -12,7 +12,7 @@ const Register = props => [
                 <br/>
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Login</h4>
+                    <h4 class="card-title">Register</h4>
                   
                 <form>
                   <div className="form-group">
