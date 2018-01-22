@@ -1,0 +1,17 @@
+.card {
+    background-color: white;
+    background-color: rgba(255, 255, 255, .8);
+    width: 70vw;
+    margin: auto;
+    text-align: left;
+}
+
+.loginWrap {
+    text-align: center;
+    padding: 20px;
+}
+
+small,
+h4 {
+    text-align: center;
+}

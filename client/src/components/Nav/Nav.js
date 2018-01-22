@@ -2,8 +2,8 @@ import React from "react";
 import "./Nav.css";
 
 const Nav = props =>
-    <nav class="navbar navbar-expand-lg">
-      <a className="navbar-brand" href="#">My Reps</a>
+  <nav class="navbar navbar-expand-lg">
+      <a className="navbar-brand" href="/">My Reps</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -12,10 +12,10 @@ const Nav = props =>
         <span className="navbar-text pull-right">
             <ul className="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a className="nav-link" href="#">{props.linkOneDisplay}</a>
+                  <a className="nav-link" href={"/" + props.linkOneDisplay}>{props.linkOneDisplay}</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="#">{props.linkTwoDisplay}</a>
+                <a className="nav-link" href={"/" + props.linkTwoDisplay}>{props.linkTwoDisplay}</a>
                 </li>
             </ul>
         </span>

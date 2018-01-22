@@ -20,7 +20,7 @@ class Home extends Component {
                     linkTwoDisplay="Register"
                 />
                 <RepDisplay>
-                    {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in our database
+                    {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in the representatives array
                           <RepCard
                               firstName= {rep.firstName}
                               lastName= {rep.lastName}
@@ -37,7 +37,7 @@ class Home extends Component {
                     ))}
                 </RepDisplay>
                 <ArticleDisplay>
-                    {this.state.articles.map( article => (
+                    {this.state.articles.map( article => ( //Makes an ArticleCard for each article in the articles array
                         <ArticleCard
                             url={article.url}
                             title={article.title}
