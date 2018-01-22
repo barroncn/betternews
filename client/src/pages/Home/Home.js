@@ -8,7 +8,8 @@ import ArticleCard from "../../components/ArticleCard";
 class Home extends Component {
 
     state = {
-        representatives: []
+        representatives: [],
+        articles: []
     };
 
     render() {
