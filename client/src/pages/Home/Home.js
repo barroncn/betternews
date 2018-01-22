@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Nav from "../../components/Nav";
 import RepDisplay from "../../components/RepDisplay";
 import RepCard from "../../components/RepCard";
-
+import ArticleDisplay from "../../components/ArticleDisplay";
+import ArticleCard from "../../components/ArticleCard";
 
 class Home extends Component {
 
