@@ -2,7 +2,7 @@ import React from "react";
 import "./ArticleCard.css";
 
 const ArticleCard = props =>
-    <div class="card article">
+  <div class="card article">
           <div className="card-header">
             <a href={props.url}>
             {props.title}<span className="pull-right">Save</span>

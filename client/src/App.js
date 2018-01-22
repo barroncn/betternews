@@ -6,6 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Voting from "./pages/Voting";
+import SavedArticles from "./pages/SavedArticles";
 import "./App.css";
 
 const App = () =>
@@ -17,6 +18,7 @@ const App = () =>
         <Route exact path="/rep/:id" component={Voting} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/savedarticles" component={SavedArticles} />
         <Route component={NoMatch} />
       </Switch>
     </div>

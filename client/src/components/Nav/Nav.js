@@ -12,10 +12,10 @@ const Nav = props =>
         <span className="navbar-text pull-right">
             <ul className="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a className="nav-link" href={"/" + props.linkOneDisplay}>{props.linkOneDisplay}</a>
+                  <a className="nav-link" href={window.location.pathname === "/profile" ? "savedarticles" : props.linkOneDisplay.toLowerCase()}>{props.linkOneDisplay}</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href={"/" + props.linkTwoDisplay}>{props.linkTwoDisplay}</a>
+                <a className="nav-link" href={window.location.pathname === "/" ? props.linkTwoDisplay.toLowerCase() : "/"}>{props.linkTwoDisplay}</a>
                 </li>
             </ul>
         </span>
