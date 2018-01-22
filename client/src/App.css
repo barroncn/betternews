@@ -1,5 +1,6 @@
-body{
-  background-image: url("./capitolbuilding.jpg");
+body {
+  background-image: url("./bwcapitol.jpg");
+  text-align: center;
 }
 
 .App {
@@ -27,6 +28,10 @@ body{
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
