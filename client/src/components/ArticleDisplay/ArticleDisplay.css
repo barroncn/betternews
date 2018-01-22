@@ -1,0 +1,15 @@
+.articleDisplay {
+    text-align: center;
+    max-height: 90vh;
+    width: 100vw;
+    overflow: scroll;
+}
+
+.theArticles {
+    background-color: white;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.articleHeader {
+    padding: 20px;
+}
