@@ -1,0 +1,16 @@
+.card {
+    width: 220px;
+    margin: 5px;
+}
+
+a,
+p {
+    padding: 2px;
+    margin: 2px;
+    color: black;
+}
+
+.rep:hover {
+    box-shadow: -7px 11px 25px -9px rgba(0, 0, 0, 1);
+    border-color: black;
+}
