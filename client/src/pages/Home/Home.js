@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Nav from "../../components/Nav";
 import RepDisplay from "../../components/RepDisplay";
 import RepCard from "../../components/RepCard";
@@ -8,7 +8,8 @@ class Home extends Component {
 
     state = {
         representatives: []
-    }
+    };
+
     render() {
         return (
             <div>
@@ -16,7 +17,7 @@ class Home extends Component {
                     linkOneDisplay="Login"
                     linkTwoDisplay="Register"
                 />
-                <RepDisplay 
+                <RepDisplay>
                     {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in our database
                           <RepCard
                               firstName= {rep.firstName}
@@ -30,15 +31,22 @@ class Home extends Component {
                               contact={rep.email}
                               phone={rep.telephone}
                               key= {rep.apiID}
-                              //clicked= {this.clicked} //Assigns each image with the clicked function from above
                           />
-                        ))}
-                />
-            
-          </div>
-        )
+                    ))}
+                </RepDisplay>
+                <ArticleDisplay>
+                    {this.state.articles.map( article => (
+                        <ArticleCard
+                            url={article.url}
+                            title={article.title}
+                            summary={article.synopsis}
+                            date={article.date}
+                        />
+                    ))}
+                </ArticleDisplay>
+            </div>
+        );
     }
-
 }
 
 export default Home;
