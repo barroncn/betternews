@@ -29,7 +29,7 @@ const Login = props => [
                   <div class="form-group">
                       <label for="inputState">State</label>
                       <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
+                        <option selected>Select Your State</option>
                         <option>AK</option>
                         <option>AL</option>
                         <option>AR</option>
