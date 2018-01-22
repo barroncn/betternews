@@ -17,10 +17,10 @@ export default {
   saveArticle: function(articleData) {
     return axios.post("/api/articles", articleData);
   },
-//   //goes to the NewsAPI to get articles
-//   getNewArticles: function() {
-//       return axios.get("WEBSITENAME");
-//   },
+  //   //goes to the NewsAPI to get articles
+  //   getNewArticles: function() {
+  //       return axios.get("WEBSITENAME");
+  //   },
   // Gets all Reps from database
   getReps: function() {
     return axios.get("/api/reps");
@@ -37,14 +37,19 @@ export default {
   saveRep: function(repData) {
     return axios.post("/api/reps", repData);
   },
-//   //goes to the Publica website to get all the reps
-//   getNewReps: function() {
-//       return axios.get("WEBSITENAME");
-//   },
-//   //goes to the publica website to get a reps voting record
-//   getRepRecord: function(id) {
-//       return axios.get("WEBSITENAME");
-//   },
+  //goes to the Publica website to get all the reps
+  getNewReps: function() {
+    var config = {
+      headers: { 'X-API-Key': 'pXokVRTYxVYCKFt7QY6smIfur1w1bT6TNJMybPan' }
+    };
+
+    return axios.get("https://api.propublica.org/congress/v1/115/senate/members.json", config);
+
+  },
+  //   //goes to the publica website to get a reps voting record
+  //   getRepRecord: function(id) {
+  //       return axios.get("WEBSITENAME");
+  //   },
   // Gets all Reps by State from database
   getStateReps: function(reptype, state) {
     return axios.get("/api/reps/" + reptype + "/" + state);

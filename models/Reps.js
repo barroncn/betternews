@@ -8,9 +8,9 @@ const repsSchema = new Schema({
   party: { type: String, required: true },
   email: String,
   state: { type: String, required: true },
-  website: { type: String, required: true },
+  website: String,
   picture: { type: String, required: true },
-  telephone: { type: String, required: true },
+  telephone: String,
   nextRace: String,
   apiID: { type: String, required: true },
 });

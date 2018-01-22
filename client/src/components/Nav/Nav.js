@@ -2,7 +2,7 @@ import React from "react";
 import "./Nav.css";
 
 const Nav = props =>
-  <nav class="navbar navbar-expand-lg">
+  <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="/">My Reps</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -11,11 +11,11 @@ const Nav = props =>
 
         <span className="navbar-text pull-right">
             <ul className="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li className="nav-item">
                   <a className="nav-link" href={window.location.pathname === "/profile" ? "savedarticles" : props.linkOneDisplay.toLowerCase()}>{props.linkOneDisplay}</a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href={window.location.pathname === "/" ? props.linkTwoDisplay.toLowerCase() : "/"}>{props.linkTwoDisplay}</a>
+                <a className="nav-link" href={(window.location.pathname === "/" || window.location.pathname === "/login") ? props.linkTwoDisplay.toLowerCase() : "/"}>{props.linkTwoDisplay}</a>
                 </li>
             </ul>
         </span>
