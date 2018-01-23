@@ -39,9 +39,3 @@ app.get("*", function(req, res) {
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
-
-//SENATE HEADSHOT
-// "https://cdn.civil.services/senate/headshots/512x512/" + FIRSTNAMElowercase + "-" + LASTNAMElowercase + ".jpg"
-//HOUSE HEADSHOT
-// "https://vote-usa.org/Image.aspx?Id=" + STATE2LETTABBREV + LASTNAME + FIRSTNAME + "&Col=Profile300&Def=Profile300"
-//                                                      ALRobyMartha
