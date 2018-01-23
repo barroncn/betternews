@@ -27,3 +27,7 @@ a {
 .card {
     margin-bottom: 20px !important;
 }
+
+.card-header {
+    padding: 20px !important;
+}
