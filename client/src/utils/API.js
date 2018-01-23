@@ -17,10 +17,11 @@ export default {
   saveArticle: function(articleData) {
     return axios.post("/api/articles", articleData);
   },
-  //   //goes to the NewsAPI to get articles
-  //   getNewArticles: function() {
-  //       return axios.get("WEBSITENAME");
-  //   },
+  //goes to the NewsAPI to get articles
+  getNewArticles: function() {
+    return axios.get("https://newsapi.org/v2/top-headlines?sources=politico&apiKey=98ae3adfcc9e4d6ea7d5c679a6452712");
+
+  },
   // Gets all Reps from database
   getReps: function() {
     return axios.get("/api/reps");

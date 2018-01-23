@@ -37,7 +37,7 @@ class Home extends Component {
     getRepInfo() {
         API.getRep(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1))
             .then(res => {
-                console.log(res.data[0]);
+                console.log(res);
                 this.setState({
                     firstName: res.data[0].firstName,
                     lastName: res.data[0].lastName,

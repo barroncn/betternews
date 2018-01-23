@@ -16,6 +16,7 @@ class Home extends Component {
     componentDidMount() {
         //this.newReps();
         this.getAllReps();
+        this.getArticles();
     }
     getAllReps() {
         API.getReps()
@@ -69,11 +70,29 @@ class Home extends Component {
             ).catch(err => console.log(err));
     }
 
+    getArticles() {
+        const articlesArray = [];
+        API.getNewArticles()
+            .then(res => {
+                res.data.articles.forEach(article =>
+                    articlesArray.push({
+                        title: article.title,
+                        url: article.url,
+                        photo: article.urlToImage,
+                        summary: article.description,
+                        date: article.publishedAt
+                    })
+                )
+                this.setState({ articles: articlesArray })
+            })
+            .catch(err => console.log(err));
+    }
+
     handleChamberChange(name) {
         console.log(name);
-        API.getChamberReps(name)
-            .then(res => this.setState({ representatives: res }))
-            .catch(err => console.log(err));
+        // API.getChamberReps(name)
+        //     .then(res => this.setState({ representatives: res }))
+        //     .catch(err => console.log(err));
     }
 
     render() {
@@ -105,8 +124,10 @@ class Home extends Component {
                         <ArticleCard
                             url={article.url}
                             title={article.title}
-                            summary={article.synopsis}
+                            summary={article.summary}
                             date={article.date}
+                            photo={article.photo}
+                            key={article.date}
                         />
                     ))}
                 </ArticleDisplay>

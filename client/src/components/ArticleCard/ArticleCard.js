@@ -2,11 +2,11 @@ import React from "react";
 import "./ArticleCard.css";
 
 const ArticleCard = props =>
-  <div class="card article">
+  <div className="card article text-left">
           <div className="card-header">
-            <a href={props.url}>
+            <h5><a href={props.url} target="_blank" class="font-weight-bold text-left">
             {props.title}<span className="pull-right">Save</span>
-            </a>
+            </a></h5>
           </div>
           <div className="card-body">
             <blockquote className="blockquote mb-0">
@@ -14,6 +14,7 @@ const ArticleCard = props =>
               <footer className="blockquote-footer">{props.date}</footer>
             </blockquote>
           </div>
+          <br/>
         </div>;
 
 export default ArticleCard;
