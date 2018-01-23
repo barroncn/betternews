@@ -2,8 +2,28 @@ a {
     color: black;
 }
 
+.align-middle {
+    /*margin-top:5px;*/
+    font-size: 25px;
+
+}
+
 .article {
     width: 90vw;
     margin: auto;
+    margin-bottom: 15px;
     text-align: left;
+}
+
+.newsImage {
+    max-width: 200px;
+    margin-left: 20px;
+}
+
+.card-body {
+    background-color: white !important;
+}
+
+.card {
+    margin-bottom: 20px !important;
 }

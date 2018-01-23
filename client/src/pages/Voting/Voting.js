@@ -70,7 +70,7 @@ class Home extends Component {
                         <div className="text-center">
                         <img src={this.state.picture} className="detailImg" alt="Representative Headshot"/>
                         <h4 className="text-center details">{(this.state.party==="D") ? "Democrat" : "Republican"} from {this.state.state}</h4>
-                        <h4 className="text-center details">Next up for election in {this.state.nextRace}</h4>
+                        <h4 className="text-center details">Seat up for election in {this.state.nextRace}</h4>
                         </div>
                         <div className="articleDisplay">
                             {this.state.votes.map( vote => ( //Makes an Vote for each Vote in the votes array
