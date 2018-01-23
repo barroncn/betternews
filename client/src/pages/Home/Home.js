@@ -13,18 +13,24 @@ class Home extends Component {
         articles: []
     };
 
+    // When the component mounts, call getAllReps function and getArticles function so we can populate the page
     componentDidMount() {
         //this.newReps();
         this.getAllReps();
         this.getArticles();
     }
+
+    // This function gets all the reps from the database (both senators and house representatives)
     getAllReps() {
         API.getReps()
             .then(res =>
+                // Set the state representatives array so the page will be updated
                 this.setState({ representatives: res.data }))
             .catch(err => console.log(err));
     }
 
+    // This function will go to the ProPublica API to get their list of senators and put those in the database 
+    // and it will also get their list os senators and put those in the database. DOES NOT DELETE RIGHT NOW!
     newReps() {
         API.getNewSenReps()
             .then(res =>
@@ -70,6 +76,7 @@ class Home extends Component {
             ).catch(err => console.log(err));
     }
 
+    // This function gets new Politico articles from the NewsAPI. (Everytime the page is loaded it will refresh the articles)
     getArticles() {
         const articlesArray = [];
         API.getNewArticles()
@@ -83,14 +90,18 @@ class Home extends Component {
                         date: article.publishedAt
                     })
                 )
+                // Set the state articles array so the page will be updated
                 this.setState({ articles: articlesArray })
             })
             .catch(err => console.log(err));
     }
 
+    // This function handles the Senators or House Representative button clicks. It will get JUST senators or JUST reps 
+    // from the database depending on the button clicked
     handleChamberChange = (name) => {
         API.getChamberReps(name)
             .then(res =>
+                // Set the state representatives array so the page will be updated
                 this.setState({ representatives: res.data }))
             .catch(err => console.log(err));
     }
@@ -103,7 +114,7 @@ class Home extends Component {
                     linkTwoDisplay="Register"
                 />
                 <RepDisplay onClick={this.handleChamberChange}>
-                    {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in the representatives array
+                    {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in the states representatives array
                           <RepCard
                               firstName= {rep.firstName}
                               lastName= {rep.lastName}
@@ -120,7 +131,7 @@ class Home extends Component {
                     ))}
                 </RepDisplay>
                 <ArticleDisplay>
-                    {this.state.articles.map( article => ( //Makes an ArticleCard for each article in the articles array
+                    {this.state.articles.map( article => ( //Makes an ArticleCard for each article in the states articles array
                         <ArticleCard
                             url={article.url}
                             title={article.title}
