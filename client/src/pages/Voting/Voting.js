@@ -76,7 +76,7 @@ class Home extends Component {
                         <h4 className="text-center details">Seat up for election in {this.state.nextRace}</h4>
                         </div>
                         <div className="articleDisplay">
-                            {this.state.votes.map( vote => ( //Makes an Vote for each Vote in the votes array
+                            {this.state.votes.map( vote => ( //Makes an Vote for each vote in the votes array
                                 <Vote
                                     title={vote.title}
                                     summary={vote.summary}
