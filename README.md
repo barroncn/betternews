@@ -2,4 +2,4 @@
 
 **Technologies Used:**
 
-MongoDB | Mongoose | Express.js | React.js | Node.js | Bulma | Passport Authentication
+MongoDB | Mongoose | Express.js | React.js | Node.js | Bootstrap | Passport Authentication
