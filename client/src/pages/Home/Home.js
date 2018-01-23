@@ -110,7 +110,9 @@ class Home extends Component {
         return (
             <div>
                 <Nav
+                    linkOne="/login"
                     linkOneDisplay="Login"
+                    linkTwo="/register"
                     linkTwoDisplay="Register"
                 />
                 <RepDisplay onClick={this.handleChamberChange}>

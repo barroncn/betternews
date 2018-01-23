@@ -16,7 +16,9 @@ class Profile extends Component {
         return (
             <div>
                 <Nav
+                    linkOne="/savedarticles"
                     linkOneDisplay="Saved Articles"
+                    linkTwo="/"
                     linkTwoDisplay="Logout"
                 />
                 <RepDisplay>

@@ -61,10 +61,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Nav
-                    linkOneDisplay="Login"
-                    linkTwoDisplay="Register"
-                />
+                <Nav/>
                 <br/>
                 <div className="voteWrapper">
                 

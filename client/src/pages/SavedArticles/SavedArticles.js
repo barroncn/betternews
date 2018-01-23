@@ -13,7 +13,9 @@ class SavedArticles extends Component {
         return (
             <div>
                 <Nav
+                    linkOne="/profile"
                     linkOneDisplay="Profile"
+                    linkTwo="/"
                     linkTwoDisplay="Logout"
                 />
                 <br/>

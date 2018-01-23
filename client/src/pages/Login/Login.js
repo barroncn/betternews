@@ -5,7 +5,9 @@ import Nav from "../../components/Nav";
 const Login = props => [
 
   <Nav
+    linkOne="/login"
     linkOneDisplay="Login"
+    linkTwo="/register"
     linkTwoDisplay="Register"
   />,
   <div className="loginWrap">
