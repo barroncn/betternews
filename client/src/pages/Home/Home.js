@@ -88,11 +88,11 @@ class Home extends Component {
             .catch(err => console.log(err));
     }
 
-    handleChamberChange(name) {
-        console.log(name);
-        // API.getChamberReps(name)
-        //     .then(res => this.setState({ representatives: res }))
-        //     .catch(err => console.log(err));
+    handleChamberChange = (name) => {
+        API.getChamberReps(name)
+            .then(res =>
+                this.setState({ representatives: res.data }))
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -102,7 +102,7 @@ class Home extends Component {
                     linkOneDisplay="Login"
                     linkTwoDisplay="Register"
                 />
-                <RepDisplay onClick={() => this.handleChamberChange}>
+                <RepDisplay onClick={this.handleChamberChange}>
                     {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in the representatives array
                           <RepCard
                               firstName= {rep.firstName}

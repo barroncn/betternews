@@ -3,7 +3,7 @@ import "./RepDisplay.css";
 
 const RepDisplay = props =>
     <div>
-        <button type="button" onClick={props.onClick("Senator,")} className="btn btn-dark">Senators</button> <button type="button" onClick={props.onClick("Representative")} className="btn btn-dark"> House Representatives</button>  
+        <button type="button" onClick={() => props.onClick("Senator,")} className="btn btn-dark">Senators</button> <button type="button" onClick={() =>props.onClick("Representative")} className="btn btn-dark"> House Representatives</button>  
         <div className = "jumbotron" >
             <div className="scrollwrapper">
                 <div className="card-deck">
