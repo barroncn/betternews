@@ -28,11 +28,11 @@ export default {
   },
   //Gets reps from a certain chamber
   getChamberReps: function(chamber) {
-    return axios.get("/api/reps/" + chamber);
+    return axios.get("/api/reps/chamber/" + chamber);
   },
   // Gets the rep with the given id
   getRep: function(id) {
-    return axios.get("/api/reps/" + id);
+    return axios.get("/api/reps/details/" + id);
   },
   // Deletes the rep with the given id
   deleteRep: function(id) {

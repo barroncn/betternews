@@ -6,13 +6,12 @@ router.route("/")
   .get(repsController.findAll)
   .post(repsController.create);
 
-// Matches with "/api/reps/:chamber"
-router.route("/:chamber")
+// Matches with "/api/reps/chamber/:chamber"
+router.route("/chamber/:chamber")
   .get(repsController.findByChamber);
 
-// Matches with "/api/reps/:id"
-router
-  .route("/:id")
+// Matches with "/api/reps/details/:id"
+router.route("/details/:id")
   .get(repsController.findById)
   .put(repsController.update)
   .delete(repsController.remove);
