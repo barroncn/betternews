@@ -10,15 +10,19 @@ class Home extends Component {
         votes: []
     };
 
+    // When the component mounts call getVoteRecord() to get the voting record from the ProPublica API 
+    // and getRepInfo() to populate specific reps info
     componentDidMount() {
         this.getVoteRecord();
         this.getRepInfo();
     }
+
+    // getVoteRecord() gets the votes listed in the ProPublica API
     getVoteRecord() {
-        const allVotes = [];
-        console.log(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1));
-        API.getRepRecord(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1))
+        const allVotes = []; //Placeholder array
+        API.getRepRecord(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1)) // pass the reps apiID from the url
             .then(res => {
+                // For each vote in the API data, push the relevent information into our placeholder array
                 res.data.results[0].votes.forEach(vote =>
                     allVotes.push({
                         title: vote.bill.number,
@@ -30,14 +34,16 @@ class Home extends Component {
                         time: vote.time
                     })
                 );
+                // Set the state allVotes array so the page will be updated
                 this.setState({ votes: allVotes });
             });
     }
 
+    // This function queries our database for the representative with the apiID from the url
     getRepInfo() {
         API.getRep(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1))
             .then(res => {
-                console.log(res);
+                // Initialize/set the state of the following properties for the corresponding representative
                 this.setState({
                     firstName: res.data[0].firstName,
                     lastName: res.data[0].lastName,
@@ -51,7 +57,6 @@ class Home extends Component {
                 });
             });
     }
-
 
     render() {
         return (
