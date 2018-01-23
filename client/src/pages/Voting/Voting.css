@@ -1,0 +1,32 @@
+.articleDisplay {
+    text-align: center;
+    max-height: 90vh;
+    width: 100%;
+    overflow: scroll;
+}
+
+.theVotes {
+    background-color: white;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.articleHeader {
+    padding: 20px;
+}
+
+.detailImg {
+    max-width: 250px;
+    margin: 20px;
+}
+
+.voteWrapper {
+    max-width: 90vw;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+/*.details {
+    */
+    /*    margin-left: 20px;*/
+    /*}*/

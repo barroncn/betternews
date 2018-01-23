@@ -2,9 +2,9 @@ import React from "react";
 import "./Vote.css";
 
 const Vote = props =>
-  <div class="card vote">
+  <div className="card vote">
           <div className="card-header">
-            <span className="pull-right">{props.title}</span>
+            <h4 className="font-italic font-weight-bold text-left">{props.title}</h4>
           </div>
           <div className="card-body">
             <blockquote className="blockquote mb-0">

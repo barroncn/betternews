@@ -2,8 +2,7 @@
     max-width: 220px;
     margin: 5px;
     border: none;
-    padding: none;
-    background-color: white;
+    background-color: white !important;
 }
 
 .card {
