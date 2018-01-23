@@ -3,7 +3,7 @@ import "./ArticleDisplay.css";
 
 const ArticleDisplay = props =>
   <div className="theArticles">
-    <h2 className="articleHeader">The Latest in Politics</h2>
+    <h2 className="articleHeader">The Latest from Politico News</h2>
     <div className="articleDisplay">
       {props.children}
     </div>
