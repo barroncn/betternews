@@ -5,30 +5,29 @@ import Nav from "../../components/Nav";
 const Register = props => [
 
   <Nav
-                    linkOneDisplay="Login"
-                    linkTwoDisplay="Register"
-                />,
+    linkOneDisplay="Login"
+    linkTwoDisplay="Register"
+  />,
   <div className="loginWrap">
-                <br/>
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Register</h4>
-                  
-                <form>
-                  <div className="form-group">
-                    <label for="emailInput">Email address</label>
-                    <input type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
-                    </div>
-                  <div className="form-group">
-                    <label for="passwordInput">Password</label>
-                    <input type="password" className="form-control" id="passwordInput" placeholder="Password" />
-                  </div>
-                  <div className="form-group">
-                    <input type="password" className="form-control" id="passwordConfirm" placeholder="Confirm Password" />
-                  </div>
-                  <div class="form-group">
-                      <label for="inputState">State</label>
-                      <select id="inputState" class="form-control">
+    <br/>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Register</h4>
+        <form>
+          <div className="form-group">
+            <label for="emailInput">Email address</label>
+            <input type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
+          </div>
+          <div className="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password" className="form-control" id="passwordInput" placeholder="Password" />
+          </div>
+          <div className="form-group">
+            <input type="password" className="form-control" id="passwordConfirm" placeholder="Confirm Password" />
+          </div>
+          <div class="form-group">
+            <label for="inputState">State</label>
+            <select id="inputState" class="form-control">
                         <option selected>Select Your State</option>
                         <option>AK</option>
                         <option>AL</option>
@@ -80,19 +79,17 @@ const Register = props => [
                         <option>WI</option>
                         <option>WV</option>
                         <option>WY</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip" />
-                    </div>
-                    <button type="submit" className="btn btn-dark">Submit</button><span>Already have an account? <a href="/login">Login</a></span>
-
-                    
-                </form>
-                </div>
-                </div>
-                </div>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" id="inputZip" />
+          </div>
+          <button type="submit" className="btn btn-dark">Submit</button><span>Already have an account? <a href="/login">Login</a></span>
+        </form>
+      </div>
+    </div>
+  </div>
 ];
 
 export default Register;
