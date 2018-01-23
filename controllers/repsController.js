@@ -15,6 +15,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByChamber: function(req, res) {
+    console.log("CHAMBER: " + req.params.chamber);
+    db.Reps
+      .find({ reptype: req.params.chamber })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     console.log(req.body);
     db.Reps

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Nav from "../../components/Nav";
-import ArticleDisplay from "../../components/ArticleDisplay";
-import ArticleCard from "../../components/ArticleCard";
 import API from "../../utils/API";
 import Vote from "../../components/Vote";
 import "./Voting.css";
@@ -71,7 +69,6 @@ class Home extends Component {
                         <img src={this.state.picture} className="detailImg" alt="Representative Headshot"/>
                         <h4 className="text-center details">{(this.state.party==="D") ? "Democrat" : "Republican"} from {this.state.state}</h4>
                         <h4 className="text-center details">Next up for election in {this.state.nextRace}</h4>
-                        <h4></h4>
                         </div>
                         <div className="articleDisplay">
                             {this.state.votes.map( vote => ( //Makes an Vote for each Vote in the votes array

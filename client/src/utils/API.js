@@ -25,6 +25,10 @@ export default {
   getReps: function() {
     return axios.get("/api/reps");
   },
+  //Gets reps from a certain chamber
+  getChamberReps: function(chamber) {
+    return axios.get("/api/reps/" + chamber);
+  },
   // Gets the rep with the given id
   getRep: function(id) {
     return axios.get("/api/reps/" + id);
@@ -37,14 +41,21 @@ export default {
   saveRep: function(repData) {
     return axios.post("/api/reps", repData);
   },
-  //goes to the Publica website to get all the reps
-  getNewReps: function() {
+  //goes to the Publica website to get all the senate reps
+  getNewSenReps: function() {
     var config = {
       headers: { 'X-API-Key': 'pXokVRTYxVYCKFt7QY6smIfur1w1bT6TNJMybPan' }
     };
 
     return axios.get("https://api.propublica.org/congress/v1/115/senate/members.json", config);
+  },
+  //goes to the Publica website to get all the house reps
+  getNewHouseReps: function() {
+    var config = {
+      headers: { 'X-API-Key': 'pXokVRTYxVYCKFt7QY6smIfur1w1bT6TNJMybPan' }
+    };
 
+    return axios.get("https://api.propublica.org/congress/v1/115/house/members.json", config);
   },
   //goes to the publica website to get a reps voting record
   getRepRecord: function(id) {

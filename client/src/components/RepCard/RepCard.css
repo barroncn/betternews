@@ -5,6 +5,11 @@
     background-color: white !important;
 }
 
+.card-img-top {
+    max-height: 220px;
+    object-fit: cover;
+}
+
 .card {
     background-color: white;
 }
@@ -12,4 +17,9 @@
 .rep:hover {
     box-shadow: -7px 11px 25px -9px rgba(0, 0, 0, 1);
     border: solid darkgray 2px;
+}
+
+.crop {
+    height: 220px;
+    overflow: hidden;
 }
