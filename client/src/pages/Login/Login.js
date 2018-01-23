@@ -5,8 +5,8 @@ import Nav from "../../components/Nav";
 const Login = props => [
 
   <Nav
-    linkOne="/login"
-    linkOneDisplay="Login"
+    linkOne="/"
+    linkOneDisplay="Home"
     linkTwo="/register"
     linkTwoDisplay="Register"
   />,

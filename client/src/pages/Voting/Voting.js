@@ -61,7 +61,10 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Nav/>
+                <Nav
+                    linkTwo="/"
+                    linkTwoDisplay="Home"
+                />
                 <br/>
                 <div className="voteWrapper">
                 

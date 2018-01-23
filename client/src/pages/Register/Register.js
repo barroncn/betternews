@@ -5,10 +5,10 @@ import Nav from "../../components/Nav";
 const Register = props => [
 
   <Nav
-    linkOne="/login"
-    linkOneDisplay="Login"
-    linkTwo="/register"
-    linkTwoDisplay="Register"
+    linkOne="/"
+    linkOneDisplay="Home"
+    linkTwo="/login"
+    linkTwoDisplay="Login"
   />,
   <div className="loginWrap">
     <br/>
