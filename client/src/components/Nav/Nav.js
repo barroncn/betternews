@@ -8,7 +8,6 @@ const Nav = props =>
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarText">
-
         <span className="navbar-text pull-right">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
