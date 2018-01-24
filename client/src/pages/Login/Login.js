@@ -4,12 +4,74 @@ import Nav from "../../components/Nav";
 
 class Login extends Component {
   state = {
-
+    email: "",
+    password: ""
   }
 
-  handleSubmitClick = (event) => {
+  handleInputChange = event => {
+    let value = event.target.value;
+    const name = event.target.name;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleSubmitClick = event => {
     event.preventDefault();
+
+    if (!this.state.email && !this.state.password) {
+      this.setState({ message: "Please enter your email and password." });
+    }
+
+    else if (!this.state.email) {
+      this.setState({ message: "Please enter your email." });
+    }
+
+    else if (!this.state.password) {
+      this.setState({ message: "Please enter your password." });
+    }
+
+    else {
+      //USER AUTHENTICATION!!!
+
+      this.setState({
+        email: "",
+        password: "",
+        message: ""
+      });
+    }
   }
+
+
+  // handleFormSubmit = event => {
+  //   // Preventing the default behavior of the form submit (which is to refresh the page)
+  //   event.preventDefault();
+  //   if (!this.state.firstName || !this.state.lastName) {
+  //     alert("Fill out your first and last name please!");
+  //   }
+  //   else if (this.state.password.length < 6) {
+  //     alert(
+  //       `Choose a more secure password ${this.state.firstName} ${this.state
+  //         .lastName}`
+  //     );
+  //   }
+  //   else {
+  //     alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
+  //   }
+
+  //   this.setState({
+  //     firstName: "",
+  //     lastName: "",
+  //     password: ""
+  //   });
+  // };
+
+
+
+
+
+
 
   render() {
     return ([
@@ -27,13 +89,29 @@ class Login extends Component {
             <form>
               <div className="form-group">
                 <label for="emailInput">Email address</label>
-                <input type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
+                <input 
+                  name="email"
+                  onChange={this.handleInputChange} 
+                  type="email" 
+                  className="form-control" 
+                  id="emailInput"
+                  aria-describedby="emailHelp" 
+                  placeholder="Enter email" 
+                  value={this.state.email}
+                />
               </div>
               <div className="form-group">
                 <label for="passwordInput">Password</label>
-                <input type="password" className="form-control" id="passwordInput" placeholder="Password" />
+                <input 
+                  name="password"
+                  onChange={this.handleInputChange} 
+                  type="password" className="form-control" 
+                  id="passwordInput" 
+                  placeholder="Password" 
+                  value={this.state.password}/>
               </div>
-              <button type="submit" onClick={this.handleSubmitClick} className="btn btn-dark">Submit</button><span>Don't have an account yet? <a href="/register">Register</a></span>
+              <button type="submit" onClick={this.handleSubmitClick} className="btn btn-dark">Submit</button><span className="errorMessage">{this.state.message}</span>
+              <div className="text-center">Don't have an account yet? <a href="/register">Register</a></div>
             </form>
           </div>
         </div>
