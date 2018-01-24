@@ -19,7 +19,7 @@ const App = () =>
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route path="/savedarticles" component={SavedArticles} />
-        <Route component={NoMatch} />
+        <Route component={Home} />
       </Switch>
     </div>
   </Router>;
