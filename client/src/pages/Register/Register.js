@@ -4,11 +4,60 @@ import Nav from "../../components/Nav";
 
 class Register extends Component {
   state = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+    userState: "Select Your State",
+    zip: "",
+    message: ""
+  }
 
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+  }
+
+  handleInputChange = event => {
+    let value = event.target.value;
+    const name = event.target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmitClick = (event) => {
     event.preventDefault();
+
+    if (!this.state.email || !this.state.password || this.state.userState === "Select Your State" || !this.state.zip) {
+      this.setState({ message: "Please complete all fields" });
+    }
+
+    else if (!this.validateEmail(this.state.email)) {
+      this.setState({ message: "Please enter a valid email address." });
+    }
+
+    else if (this.state.password.length < 6) {
+      this.setState({ message: "Password must be at least six characters long." });
+    }
+
+    // else if (this.state.password != this.state.confirmPassword) {
+    //   this.setState({ message: "Passwords do not match." });
+    // }
+
+    else {
+      //CREATE USER AND VALIDATE!
+
+      this.setState({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        userState: "Select Your State",
+        zip: "",
+        message: ""
+      });
+    }
+
   }
 
   render() {
@@ -27,18 +76,50 @@ class Register extends Component {
               <form>
                 <div className="form-group">
                   <label for="emailInput">Email address</label>
-                  <input type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" />
+                  <input 
+                    name="email"
+                    onChange={this.handleInputChange}
+                    type="email" 
+                    className="form-control" 
+                    id="emailInput" 
+                    aria-describedby="emailHelp" 
+                    placeholder="Enter email" 
+                    value={this.state.email}  
+                  />
                 </div>
                 <div className="form-group">
                   <label for="passwordInput">Password</label>
-                  <input type="password" className="form-control" id="passwordInput" placeholder="Password" />
+                  <input 
+                    name="password"
+                    onChange={this.handleInputChange}
+                    type="password" 
+                    className="form-control" 
+                    id="passwordInput" 
+                    placeholder="Password" 
+                    value={this.state.password}
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" id="passwordConfirm" placeholder="Confirm Password" />
+                  <input 
+                    name="passwordConfirm"
+                    onChange={this.handleInputChange}
+                    type="password" 
+                    className="form-control" 
+                    id="passwordConfirm" 
+                    placeholder="Confirm Password" 
+                    value={this.state.passwordConfirm}
+                  />
                 </div>
                 <div class="form-group">
                   <label for="inputState">State</label>
-                  <select id="inputState" class="form-control">
+                  <select 
+                    name="userState"
+                    onChange={this.handleInputChange}
+                    id="inputState" 
+                    class="form-control"
+                    value={this.state.userState}
+                  
+                  >
                               <option selected>Select Your State</option>
                               <option>AK</option>
                               <option>AL</option>
@@ -94,9 +175,17 @@ class Register extends Component {
                 </div>
                 <div class="form-group">
                   <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip" />
+                  <input 
+                    name="zip"
+                    onChange={this.handleInputChange}
+                    type="text" 
+                    class="form-control" 
+                    id="inputZip" 
+                    value={this.state.zip}
+                  />
                 </div>
-                <button type="submit" onClick={this.handleSubmitClick} className="btn btn-dark">Submit</button><span>Already have an account? <a href="/login">Login</a></span>
+                <button type="submit" onClick={this.handleSubmitClick} className="btn btn-dark">Submit</button><span className="errorMessage">{this.state.message}</span>
+                <div className="text-center">Already have an account? <a href="/login">Login</a></div>
               </form>
             </div>
           </div>
@@ -106,3 +195,7 @@ class Register extends Component {
 }
 
 export default Register;
+
+
+// || this.state.userState === "Select Your State" 
+// || !this.state.confirmPassword || !this.state.zip

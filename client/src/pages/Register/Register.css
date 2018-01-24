@@ -15,3 +15,7 @@ small,
 h4 {
     text-align: center;
 }
+
+.errorMessage {
+    color: red;
+}
