@@ -22,13 +22,12 @@ const usersSchema = new Schema({
   state: {
     type: String,
     trim: true,
-    required: "State is Required",
-    validate: [
-      function(input) {
-        return input.length === 2;
-      },
-      "Use the two letter state abbreviation."
-    ]
+    required: "State is Required"
+  },
+  zipCode: {
+    type: String,
+    trim: true,
+    required: "Zip Code is Required"
   },
   savedArticles: [{
     type: Schema.Types.ObjectId,

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./Register.css";
 import Nav from "../../components/Nav";
+import API from "../../utils/API";
 
 class Register extends Component {
   state = {
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -29,7 +31,7 @@ class Register extends Component {
   handleSubmitClick = (event) => {
     event.preventDefault();
 
-    if (!this.state.email || !this.state.password || this.state.userState === "Select Your State" || !this.state.zip) {
+    if (!this.state.name || !this.state.email || !this.state.password || this.state.userState === "Select Your State" || !this.state.zip) {
       this.setState({ message: "Please complete all fields" });
     }
 
@@ -41,27 +43,50 @@ class Register extends Component {
       this.setState({ message: "Password must be at least six characters long." });
     }
 
-    // else if (this.state.password != this.state.confirmPassword) {
-    //   this.setState({ message: "Passwords do not match." });
-    // }
+    else if (this.state.zip.length !== 5) {
+      this.setState({ message: "Please enter a five-digit zip code." });
+    }
+
+    else if (this.state.password !== this.state.confirmPassword) {
+      console.log(this.state.password);
+      console.log(this.state.confirmPassword);
+      this.setState({ message: "Passwords do not match." });
+    }
 
     else {
-      //CREATE USER AND VALIDATE!
+      API.saveUser({
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          state: this.state.userState,
+          zipCode: this.state.zip
+        })
+        .then(res => {
+          console.log(res.data.code);
+          if (res.data.code === 11000) {
+            this.setState({ message: "This email is already registered." });
+          }
+        })
+        .catch(err => console.log(err));
 
-      this.setState({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        userState: "Select Your State",
-        zip: "",
-        message: ""
-      });
+      //VALIDATE!
+
+      // this.setState({
+      //   name: "",
+      //   email: "",
+      //   password: "",
+      //   confirmPassword: "",
+      //   userState: "Select Your State",
+      //   zip: "",
+      //   message: ""
+      // });
     }
 
   }
 
   render() {
-    return ([
+    return (
+      <div>
       <Nav
           linkOne="/"
           linkOneDisplay="Home"
@@ -70,12 +95,25 @@ class Register extends Component {
         />,
       <div className="loginWrap">
           <br/>
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Register</h4>
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">Register</h4>
               <form>
                 <div className="form-group">
-                  <label for="emailInput">Email address</label>
+                  <label>Name</label>
+                  <input 
+                    name="name"
+                    onChange={this.handleInputChange}
+                    type="input" 
+                    className="form-control" 
+                    id="userName" 
+                    aria-describedby="emailHelp" 
+                    //placeholder="Enter Name" 
+                    value={this.state.name}  
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Email address</label>
                   <input 
                     name="email"
                     onChange={this.handleInputChange}
@@ -83,44 +121,44 @@ class Register extends Component {
                     className="form-control" 
                     id="emailInput" 
                     aria-describedby="emailHelp" 
-                    placeholder="Enter email" 
+                    //placeholder="Enter email" 
                     value={this.state.email}  
                   />
                 </div>
                 <div className="form-group">
-                  <label for="passwordInput">Password</label>
+                  <label>Password</label>
                   <input 
                     name="password"
                     onChange={this.handleInputChange}
                     type="password" 
                     className="form-control" 
                     id="passwordInput" 
-                    placeholder="Password" 
+                    placeholder="Enter Password" 
                     value={this.state.password}
                   />
                 </div>
                 <div className="form-group">
                   <input 
-                    name="passwordConfirm"
+                    name="confirmPassword"
                     onChange={this.handleInputChange}
                     type="password" 
                     className="form-control" 
                     id="passwordConfirm" 
                     placeholder="Confirm Password" 
-                    value={this.state.passwordConfirm}
+                    value={this.state.confirmPassword}
                   />
                 </div>
-                <div class="form-group">
-                  <label for="inputState">State</label>
+                <div className="form-group">
+                  <label>State</label>
                   <select 
                     name="userState"
                     onChange={this.handleInputChange}
                     id="inputState" 
-                    class="form-control"
+                    className="form-control"
                     value={this.state.userState}
                   
                   >
-                              <option selected>Select Your State</option>
+                              <option>Select Your State</option>
                               <option>AK</option>
                               <option>AL</option>
                               <option>AR</option>
@@ -173,14 +211,15 @@ class Register extends Component {
                               <option>WY</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label for="inputZip">Zip</label>
+                <div className="form-group">
+                  <label>Zip Code</label>
                   <input 
                     name="zip"
                     onChange={this.handleInputChange}
                     type="text" 
-                    class="form-control" 
+                    className="form-control" 
                     id="inputZip" 
+                    //placeholder="Enter Zip Code" 
                     value={this.state.zip}
                   />
                 </div>
@@ -190,7 +229,8 @@ class Register extends Component {
             </div>
           </div>
         </div>
-    ]);
+        </div>
+    );
   }
 }
 
