@@ -44,7 +44,7 @@ class Register extends Component {
     }
 
     else if (this.state.zip.length !== 5) {
-      this.setState({ message: "Please enter a five-digit zip code." });
+      this.setState({ message: "Please enter a five digit zip code." });
     }
 
     else if (this.state.password !== this.state.confirmPassword) {
@@ -66,22 +66,23 @@ class Register extends Component {
           if (res.data.code === 11000) {
             this.setState({ message: "This email is already registered." });
           }
+          // else{
+          //   //VALIDATE AND REDIRECT TO THE USER
+          // }
+
+          // Reset the form
+          // this.setState({
+          //   name: "",
+          //   email: "",
+          //   password: "",
+          //   confirmPassword: "",
+          //   userState: "Select Your State",
+          //   zip: "",
+          //   message: ""
+          // });
         })
         .catch(err => console.log(err));
-
-      //VALIDATE!
-
-      // this.setState({
-      //   name: "",
-      //   email: "",
-      //   password: "",
-      //   confirmPassword: "",
-      //   userState: "Select Your State",
-      //   zip: "",
-      //   message: ""
-      // });
     }
-
   }
 
   render() {
@@ -156,7 +157,6 @@ class Register extends Component {
                     id="inputState" 
                     className="form-control"
                     value={this.state.userState}
-                  
                   >
                               <option>Select Your State</option>
                               <option>AK</option>
@@ -235,7 +235,3 @@ class Register extends Component {
 }
 
 export default Register;
-
-
-// || this.state.userState === "Select Your State" 
-// || !this.state.confirmPassword || !this.state.zip
