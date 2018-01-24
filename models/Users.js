@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
   name: { type: String, required: true },
-  email: {
+  username: {
     type: String,
     unique: true,
     match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]

@@ -32,7 +32,7 @@ class Register extends Component {
     event.preventDefault();
 
     if (!this.state.name || !this.state.email || !this.state.password || this.state.userState === "Select Your State" || !this.state.zip) {
-      this.setState({ message: "Please complete all fields" });
+      this.setState({ message: "Please complete all fields." });
     }
 
     else if (!this.validateEmail(this.state.email)) {
@@ -50,17 +50,22 @@ class Register extends Component {
     else if (this.state.password !== this.state.confirmPassword) {
       console.log(this.state.password);
       console.log(this.state.confirmPassword);
-      this.setState({ message: "Passwords do not match." });
+      this.setState({
+        password: "",
+        confirmPassword: "",
+        message: "Passwords do not match."
+      });
     }
 
     else {
-      API.saveUser({
-          name: this.state.name,
-          email: this.state.email,
-          password: this.state.password,
-          state: this.state.userState,
-          zipCode: this.state.zip
-        })
+      const newUser = {
+        name: this.state.name,
+        username: this.state.email,
+        password: this.state.password,
+        state: this.state.userState,
+        zipCode: this.state.zip
+      }
+      API.saveUser(newUser)
         .then(res => {
           console.log(res.data.code);
           if (res.data.code === 11000) {
@@ -68,18 +73,24 @@ class Register extends Component {
           }
           // else{
           //   //VALIDATE AND REDIRECT TO THE USER
-          // }
-
+          // req.login(newUser, function(err) {
+          //   if (err) { return next(err); }
+          //  
           // Reset the form
           // this.setState({
           //   name: "",
-          //   email: "",
+          //   username: "",
           //   password: "",
           //   confirmPassword: "",
           //   userState: "Select Your State",
           //   zip: "",
           //   message: ""
+          // }); 
+          // return res.redirect('/profile/' + req.user._id);
           // });
+          // }
+
+
         })
         .catch(err => console.log(err));
     }
