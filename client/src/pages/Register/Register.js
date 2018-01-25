@@ -9,7 +9,7 @@ class Register extends Component {
     email: "",
     password: "",
     confirmPassword: "",
-    userState: "Select Your State",
+    userState: "", //"Select Your State",
     zip: "",
     message: ""
   }
@@ -31,7 +31,7 @@ class Register extends Component {
   handleSubmitClick = (event) => {
     event.preventDefault();
 
-    if (!this.state.name || !this.state.email || !this.state.password || this.state.userState === "Select Your State" || !this.state.zip) {
+    if (!this.state.name || !this.state.email || !this.state.password || !this.state.userState || !this.state.zip) {
       this.setState({ message: "Please complete all fields." });
     }
 
@@ -64,31 +64,31 @@ class Register extends Component {
         password: this.state.password,
         state: this.state.userState,
         zipCode: this.state.zip
-      }
+      };
       API.saveUser(newUser)
         .then(res => {
-          console.log(res.data.code);
+          console.log(res.data);
           if (res.data.code === 11000) {
             this.setState({ message: "This email is already registered." });
           }
-          // else{
-          //   //VALIDATE AND REDIRECT TO THE USER
-          // req.login(newUser, function(err) {
-          //   if (err) { return next(err); }
-          //  
-          // Reset the form
-          // this.setState({
-          //   name: "",
-          //   username: "",
-          //   password: "",
-          //   confirmPassword: "",
-          //   userState: "Select Your State",
-          //   zip: "",
-          //   message: ""
-          // }); 
-          // return res.redirect('/profile/' + req.user._id);
-          // });
-          // }
+          else {
+            //   //VALIDATE AND REDIRECT TO THE USER
+            // req.login(newUser, function(err) {
+            //   if (err) { return next(err); }
+            //  
+            // Reset the form
+            this.setState({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+              userState: "",
+              zip: "",
+              message: ""
+            });
+            // return res.redirect('/profile/' + req.user._id);
+            // });
+          }
 
 
         })
@@ -125,7 +125,7 @@ class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Email address</label>
+                  <label>Email Address</label>
                   <input 
                     name="email"
                     onChange={this.handleInputChange}
@@ -145,18 +145,19 @@ class Register extends Component {
                     type="password" 
                     className="form-control" 
                     id="passwordInput" 
-                    placeholder="Enter Password" 
+                    //placeholder="Enter Password" 
                     value={this.state.password}
                   />
                 </div>
                 <div className="form-group">
+                  <label>Confirm Password</label>
                   <input 
                     name="confirmPassword"
                     onChange={this.handleInputChange}
                     type="password" 
                     className="form-control" 
                     id="passwordConfirm" 
-                    placeholder="Confirm Password" 
+                    //placeholder="Confirm Password" 
                     value={this.state.confirmPassword}
                   />
                 </div>
@@ -169,7 +170,7 @@ class Register extends Component {
                     className="form-control"
                     value={this.state.userState}
                   >
-                              <option>Select Your State</option>
+                              <option></option>
                               <option>AK</option>
                               <option>AL</option>
                               <option>AR</option>
