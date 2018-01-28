@@ -2,40 +2,47 @@ const express = require("express");
 const path = require("path");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
-var mongoose = require("mongoose");
-const routes = require("./routes");
-const PORT = 8081; //process.env.PORT || 
+const passport = require("passport");
+const config = require("./config");
+const mongoose = require("mongoose");
 const app = express();
 
-// Use morgan logger for logging requests
-app.use(logger("dev"));
-// Use body-parser for handling form submissions
-app.use(bodyParser.urlencoded({ extended: false }));
-// Use express.static to serve the public folder as a static directory
-app.use(bodyParser.json());
-
-// Serve up static assets (usually on heroku)
+// STATIC ASSETS (served to Heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Set mongoose to leverage built in Promises && Connect to Mongo DB---------------------------
-mongoose.Promise = Promise;
+//MIDDLEWARE PASSPORT STRATEGIES
+app.use(passport.initialize());
+const localRegisterStrategy = require("./passport/local-register");
+const localLoginStrategy = require("./passport/local-login");
+passport.use("local-register", localRegisterStrategy);
+passport.use("local-login", localLoginStrategy);
+const authCheckMiddleware = require("./middleware/auth-check");
+app.use("/user", authCheckMiddleware);
 
-// If deployed, use the deployed database. Otherwise use the local myreps database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/myreps";
-mongoose.connect(MONGODB_URI);
+//BODYPARSER
+app.use(logger("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+
+//DATABASE
+mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/myreps");
 
-//add routes, both API and view
+
+//ROUTES
+const routes = require("./routes");
 app.use(routes);
-
 // Send every request to the React app
-// Define any API routes before this runs
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+//START SERVER
+const PORT = 8081; //process.env.PORT ||
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

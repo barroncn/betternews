@@ -1,20 +1,32 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import "./Register.css";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
+import Auth from "../../modules/Auth.js";
 
 class Register extends Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    userState: "", //"Select Your State",
-    zip: "",
-    message: ""
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      errors: "",
+      username: "",
+      password: "",
+      name: "",
+      confirmPassword: "",
+      userState: "", //"Select Your State",
+      zip: "",
+      message: "",
+      redirect: undefined
+    };
+
+    this.processUser = this.processUser.bind(this);
   }
 
   validateEmail(email) {
+    // eslint-disable-next-line
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.toLowerCase());
   }
@@ -28,23 +40,49 @@ class Register extends Component {
     });
   }
 
+  //sends our register user request through authorization
+  processUser(userID) {
+    const username = encodeURIComponent(this.state.username);
+    const password = encodeURIComponent(this.state.password);
+    const userData = `username=${username}&password=${password}`;
+
+    //AJAX request
+    const xhr = new XMLHttpRequest();
+    xhr.open("post", "/auth/login");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.responseType = "json";
+    xhr.addEventListener("load", () => {
+      if (xhr.status === 200) { //if successful
+        this.setState({ errors: {} }); //set error state to no errors
+        Auth.authenticateUser(xhr.response.token);
+        console.log("The form is valid");
+        console.log(xhr);
+        this.setState({ redirect: <Redirect to={"/profile/" + userID} /> }) //Redirect the user to their profile
+      }
+      else { //if the request failed
+        console.log(xhr.response);
+        const errors = xhr.response.errors ? xhr.response.errors : {};
+        errors.summary = xhr.response.message;
+
+        this.setState({ errors }); // set error state to either the xhr response errors or leave empty
+      }
+    });
+    xhr.send(userData);
+  }
+
   handleSubmitClick = (event) => {
     event.preventDefault();
 
-    if (!this.state.name || !this.state.email || !this.state.password || !this.state.userState || !this.state.zip) {
+    if (!this.state.name || !this.state.username || !this.state.password || !this.state.userState || !this.state.zip) {
       this.setState({ message: "Please complete all fields." });
     }
 
-    else if (!this.validateEmail(this.state.email)) {
+    else if (!this.validateEmail(this.state.username)) {
       this.setState({ message: "Please enter a valid email address." });
     }
 
     else if (this.state.password.length < 6) {
       this.setState({ message: "Password must be at least six characters long." });
-    }
-
-    else if (this.state.zip.length !== 5) {
-      this.setState({ message: "Please enter a five digit zip code." });
     }
 
     else if (this.state.password !== this.state.confirmPassword) {
@@ -57,10 +95,14 @@ class Register extends Component {
       });
     }
 
+    else if (this.state.zip.length !== 5) {
+      this.setState({ message: "Please enter a five digit zip code." });
+    }
+
     else {
       const newUser = {
         name: this.state.name,
-        username: this.state.email,
+        username: this.state.username,
         password: this.state.password,
         state: this.state.userState,
         zipCode: this.state.zip
@@ -72,20 +114,18 @@ class Register extends Component {
             this.setState({ message: "This email is already registered." });
           }
           else {
-            //   //VALIDATE AND REDIRECT TO THE USER
-            // req.login(newUser, function(err) {
-            //   if (err) { return next(err); }
-            //  
-            // Reset the form
-            this.setState({
-              name: "",
-              email: "",
-              password: "",
-              confirmPassword: "",
-              userState: "",
-              zip: "",
-              message: ""
-            });
+            this.processUser(res.data._id);
+            // // Reset the form
+            // this.setState({
+            //   error: "",
+            //   name: "",
+            //   username: "",
+            //   password: "",
+            //   confirmPassword: "",
+            //   userState: "",
+            //   zip: "",
+            //   message: ""
+            // });
             // return res.redirect('/profile/' + req.user._id);
             // });
           }
@@ -127,14 +167,14 @@ class Register extends Component {
                 <div className="form-group">
                   <label>Email Address</label>
                   <input 
-                    name="email"
+                    name="username"
                     onChange={this.handleInputChange}
                     type="email" 
                     className="form-control" 
                     id="emailInput" 
                     aria-describedby="emailHelp" 
                     //placeholder="Enter email" 
-                    value={this.state.email}  
+                    value={this.state.username}  
                   />
                 </div>
                 <div className="form-group">

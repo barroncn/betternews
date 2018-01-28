@@ -1,7 +1,6 @@
-// Exporting an object containing all of our models
-
+// Exporting an object containing all of our models and our connection
 module.exports = {
-    Articles: require("./Articles"),
+    Users: require("./Users"),
     Reps: require("./Reps"),
-    Users: require("./Users")
+    Articles: require("./Articles")
 };

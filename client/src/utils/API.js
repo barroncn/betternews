@@ -1,6 +1,9 @@
 import axios from "axios";
+// import Auth from "../modules/Auth.js";
+// const authHeader = () => ({ "Authorization": `bearer ${Auth.getToken()}` })
 
 export default {
+  //ARTICLES=====================================================================================================================
   // Gets all Articles from database
   getArticles: function() {
     return axios.get("/api/articles");
@@ -20,8 +23,9 @@ export default {
   //goes to the NewsAPI to get articles
   getNewArticles: function() {
     return axios.get("https://newsapi.org/v2/top-headlines?sources=politico&apiKey=98ae3adfcc9e4d6ea7d5c679a6452712");
-
   },
+
+  //REPS=====================================================================================================================
   // Gets all Reps from database
   getReps: function() {
     return axios.get("/api/reps");
@@ -71,20 +75,22 @@ export default {
   getStateReps: function(reptype, state) {
     return axios.get("/api/reps/" + reptype + "/" + state);
   },
+
+  //USERS=====================================================================================================================
   // Gets all Users from database
   getUsers: function() {
-    return axios.get("/api/users");
+    return axios.get("/user/profile");
   },
   // Gets the User with the given id
   getUser: function(id) {
-    return axios.get("/api/users/" + id);
+    return axios.get("/user/profile/id/" + id);
   },
   // Deletes the User with the given id
   deleteUser: function(id) {
-    return axios.delete("/api/users/" + id);
+    return axios.delete("/user/profile/id/" + id);
   },
   // Saves a User to the database
   saveUser: function(userData) {
-    return axios.post("/api/users", userData);
+    return axios.post("/api/user", userData);
   }
 };

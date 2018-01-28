@@ -3,10 +3,47 @@ import "./Login.css";
 import Nav from "../../components/Nav";
 
 class Login extends Component {
-  state = {
-    email: "",
-    password: ""
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      errors: {},
+      user: {
+        email: "",
+        password: ""
+      },
+    };
+
+    this.processUser = this.processUser.bind(this);
   }
+
+  processUser() {
+    const username = encodeURIComponent(this.state.user.username);
+    const password = encodeURIComponent(this.state.user.password);
+    const userData = `username=${username}&password=${password}`;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("post", "auth/login");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.responseType = "json";
+    xhr.addEventListener("load", () => {
+      if (xhr.status === 200) {
+        console.log("The form is valid");
+        console.log(xhr);
+        this.setState({ errors: {} });
+      }
+      else {
+        console.log(xhr.response);
+        const errors = xhr.response.errors ? xhr.response.errors : {};
+        errors.summary = xhr.response.message;
+
+        this.setState({ errors });
+      }
+    });
+    xhr.send(userData);
+  }
+
 
   handleInputChange = event => {
     let value = event.target.value;
