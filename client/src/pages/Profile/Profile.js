@@ -4,6 +4,7 @@ import RepDisplay from "../../components/RepDisplay";
 import RepCard from "../../components/RepCard";
 import ArticleDisplay from "../../components/ArticleDisplay";
 import ArticleCard from "../../components/ArticleCard";
+import API from "../../utils/API";
 
 class Profile extends Component {
 
@@ -11,6 +12,66 @@ class Profile extends Component {
         representatives: [],
         articles: []
     };
+
+    componentDidMount() {
+        const id = "'" + window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1) + "'";
+        const objID = "ObjectId(" + id + ")";
+        console.log(objID);
+        API.getUser(objID)
+            .then(res => {
+                this.setState({
+                    name: res.name,
+                    userState: res.state,
+                    zipCode: res.zipCode
+                });
+                this.getStateSen();
+                this.getArticles();
+            });
+    }
+
+    getArticles() {
+        const articlesArray = [];
+        API.getNewArticles()
+            .then(res => {
+                res.data.articles.forEach(article =>
+                    articlesArray.push({
+                        title: article.title,
+                        url: article.url,
+                        photo: article.urlToImage,
+                        summary: article.description,
+                        date: article.publishedAt
+                    })
+                )
+                // Set the state articles array so the page will be updated
+                this.setState({ articles: articlesArray })
+            })
+            .catch(err => console.log(err));
+    }
+
+    getStateSen() {
+        API.getStateReps("Senator,", this.state.userState)
+            .then(res =>
+                // Set the state representatives array so the page will be updated
+                this.setState({ representatives: res.data }))
+            .catch(err => console.log(err));
+    }
+
+    getStateRep() {
+        API.getStateReps("Representative", this.state.userState)
+            .then(res =>
+                // Set the state representatives array so the page will be updated
+                this.setState({ representatives: res.data }))
+            .catch(err => console.log(err));
+    }
+
+    handleChamberChange = name => {
+        if (name === "Senator,") {
+            this.getStateSen();
+        }
+        else {
+            this.getStateRep();
+        }
+    }
 
     render() {
         return (
@@ -21,7 +82,7 @@ class Profile extends Component {
                     linkTwo="/"
                     linkTwoDisplay="Logout"
                 />
-                <RepDisplay>
+                <RepDisplay onClick={this.handleChamberChange}>
                     {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in the representatives array
                           <RepCard
                               firstName= {rep.firstName}

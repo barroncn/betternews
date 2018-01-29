@@ -1,6 +1,6 @@
 import axios from "axios";
-// import Auth from "../modules/Auth.js";
-// const authHeader = () => ({ "Authorization": `bearer ${Auth.getToken()}` })
+import Auth from "../modules/Auth.js";
+const authHeader = () => ({ "Authorization": `bearer ${Auth.getToken()}` });
 
 export default {
   //ARTICLES=====================================================================================================================
@@ -79,15 +79,27 @@ export default {
   //USERS=====================================================================================================================
   // Gets all Users from database
   getUsers: function() {
-    return axios.get("/user/profile");
+    return axios({
+      method: "get",
+      url: "/user/profile",
+      headers: authHeader()
+    });
   },
   // Gets the User with the given id
   getUser: function(id) {
-    return axios.get("/user/profile/id/" + id);
+    return axios({
+      method: "get",
+      url: "/user/profile/id/" + id,
+      headers: authHeader()
+    });
   },
   // Deletes the User with the given id
   deleteUser: function(id) {
-    return axios.delete("/user/profile/id/" + id);
+    return axios({
+      method: "delete",
+      url: "/user/profile/id/" + id,
+      headers: authHeader()
+    });
   },
   // Saves a User to the database
   saveUser: function(userData) {

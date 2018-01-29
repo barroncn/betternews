@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const User = require("mongoose").model("Users");
+const Users = require("../models/Users.js");
 const config = require("../config");
-const secret = process.env.JWT_SECRET || config.jwtSecret
+const secret = process.env.JWT_SECRET || config.jwtSecret;
 
 
 //The Auth Checker Middleware function
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
         const userId = decoded.sub;
 
         //check if a user exists
-        return User.findById(userId, (userErr, user) => {
+        return Users.findById(userId, (userErr, user) => {
             if (userErr || !user) {
                 return res.status(401).end();
             }

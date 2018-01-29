@@ -4,6 +4,7 @@ import "./Register.css";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import Auth from "../../modules/Auth.js";
+import axios from "axios";
 
 class Register extends Component {
 
@@ -42,32 +43,52 @@ class Register extends Component {
 
   //sends our register user request through authorization
   processUser(userID) {
-    const username = encodeURIComponent(this.state.username);
-    const password = encodeURIComponent(this.state.password);
-    const userData = `username=${username}&password=${password}`;
+    // const username = encodeURIComponent(this.state.username);
+    // const password = encodeURIComponent(this.state.password);
+    // const userData = `username=${username}&password=${password}`;
 
     //AJAX request
-    const xhr = new XMLHttpRequest();
-    xhr.open("post", "/auth/login");
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.responseType = "json";
-    xhr.addEventListener("load", () => {
-      if (xhr.status === 200) { //if successful
-        this.setState({ errors: {} }); //set error state to no errors
-        Auth.authenticateUser(xhr.response.token);
-        console.log("The form is valid");
-        console.log(xhr);
-        this.setState({ redirect: <Redirect to={"/profile/" + userID} /> }) //Redirect the user to their profile
+    axios.post("/auth/login", {
+      "username": this.state.username,
+      "password": this.state.password
+    }).then(res => {
+      console.log("RES:");
+      console.log(res);
+      console.log("+++++++++++++++++++++++++++++++++++++++");
+      console.log("TOKEN");
+      console.log(res.data.token);
+      if (!res.data.success) {
+        console.log(res.data);
       }
-      else { //if the request failed
-        console.log(xhr.response);
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
-
-        this.setState({ errors }); // set error state to either the xhr response errors or leave empty
+      else {
+        Auth.authenticateUser(res.data.token);
+        this.setState({
+          "errors": {},
+          "redirect": <Redirect to={"/profile/" + userID} />
+        });
       }
     });
-    xhr.send(userData);
+    // const xhr = new XMLHttpRequest();
+    // xhr.open("post", "/auth/login");
+    // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xhr.responseType = "json";
+    // xhr.addEventListener("load", () => {
+    //   if (xhr.status === 200) { //if successful
+    //     this.setState({ errors: {} }); //set error state to no errors
+    //     console.log(xhr);
+    //     Auth.authenticateUser(xhr.response.token);
+    //     console.log("The form is valid");
+    //     this.setState({ redirect: <Redirect to={"/profile/" + userID} /> }); //Redirect the user to their profile
+    //   }
+    //   else { //if the request failed
+    //     console.log(xhr.response);
+    //     const errors = xhr.response.errors ? xhr.response.errors : {};
+    //     errors.summary = xhr.response.message;
+
+    //     this.setState({ errors }); // set error state to either the xhr response errors or leave empty
+    //   }
+    // });
+    // xhr.send(userData);
   }
 
   handleSubmitClick = (event) => {
@@ -114,7 +135,8 @@ class Register extends Component {
             this.setState({ message: "This email is already registered." });
           }
           else {
-            this.processUser(res.data._id);
+            this.processUser(res.data._id.valueOf());
+            //ObjectId("507c7f79bcf86cd7994f6c0e").valueOf()
             // // Reset the form
             // this.setState({
             //   error: "",

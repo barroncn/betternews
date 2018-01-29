@@ -2,20 +2,21 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/Users.js");
 const PassportLocalStrategy = require("passport-local").Strategy;
 const config = require("../config");
+const secret = process.env.JWT_SECRET || config.jwtSecret;
 
 //Return the Passport Local Strategy object.
 module.exports = new PassportLocalStrategy({
-    usernameField: "email",
+    usernameField: "username",
     passwordField: "password",
     session: false,
     passReqToCallback: true
-}, (req, email, password, done) => {
+}, (req, username, password, done) => {
     const userData = {
-        email: email.trim(),
+        username: username.trim(),
         password: password.trim()
     };
 
-    return User.findOne({ username: userData.email }, (err, user) => {
+    return User.findOne({ username: userData.username }, (err, user) => {
         if (err) { return done(err); }
 
         if (!user) {
@@ -36,15 +37,15 @@ module.exports = new PassportLocalStrategy({
                 return done(error);
             }
 
-            const payload = {
+            let payload = {
                 sub: user._id
             };
 
             //create a token string
-            const token = jwt.sign(payload, config.jwtSecret);
-            const data = {
+            let token = jwt.sign(payload, secret);
+            let data = {
                 name: user.name,
-                userID: user._id,
+                userID: user._id.valueOf(),
                 userState: user.state
             };
 

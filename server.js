@@ -3,7 +3,6 @@ const path = require("path");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 const passport = require("passport");
-const config = require("./config");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -26,6 +25,7 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //DATABASE
 mongoose.Promise = global.Promise;

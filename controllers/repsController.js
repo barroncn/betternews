@@ -43,8 +43,7 @@ module.exports = {
   },
   findRepsbyState: function(req, res) {
     db.Reps
-      .find({ reptype: req.params.reptype })
-      .where("state").equals(req.params.state)
+      .find({ reptype: req.params.reptype, state: req.params.state })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
