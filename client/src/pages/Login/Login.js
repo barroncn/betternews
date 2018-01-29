@@ -36,15 +36,18 @@ class Login extends Component {
       "username": this.state.username,
       "password": this.state.password
     }).then(res => {
-      console.log("RES:");
-      console.log(res);
-      console.log("+++++++++++++++++++++++++++++++++++++++");
-      console.log("TOKEN");
-      console.log(res.data.token);
       if (!res.data.success) {
+        console.log("ERROR:");
         console.log(res.data);
+        this.setState({ message: "Incorrect Username or Password." })
       }
       else {
+        console.log("RES:");
+        console.log(res);
+        console.log("+++++++++++++++++++++++++++++++++++++++");
+        console.log("TOKEN");
+        console.log(res.data.token);
+        console.log("REDIRECT ID: " + res.data.user.userID);
         Auth.authenticateUser(res.data.token);
         this.setState({
           "errors": {},
@@ -83,6 +86,7 @@ class Login extends Component {
 
   render() {
     return (
+      this.state.redirect ? this.state.redirect :
       <div>
       <Nav
         linkOne="/"

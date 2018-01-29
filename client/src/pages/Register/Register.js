@@ -52,15 +52,16 @@ class Register extends Component {
       "username": this.state.username,
       "password": this.state.password
     }).then(res => {
-      console.log("RES:");
-      console.log(res);
-      console.log("+++++++++++++++++++++++++++++++++++++++");
-      console.log("TOKEN");
-      console.log(res.data.token);
-      if (!res.data.success) {
+      if (!res.data.sucess) {
+        console.log("FAILURE");
         console.log(res.data);
       }
       else {
+        console.log("RES:");
+        console.log(res);
+        console.log("+++++++++++++++++++++++++++++++++++++++");
+        console.log("TOKEN");
+        console.log(res.data.token);
         Auth.authenticateUser(res.data.token);
         this.setState({
           "errors": {},
@@ -160,6 +161,7 @@ class Register extends Component {
 
   render() {
     return (
+      this.state.redirect ? this.state.redirect :
       <div>
       <Nav
           linkOne="/"

@@ -21,7 +21,7 @@ const App = () =>
         <Route path="/savedarticles" component={SavedArticles} />
         <Route exact path="/logout" render={() => {
               Auth.deauthenticateUser();
-              return <Redirect to="/"/>
+              return <Redirect to="/"/>;
             }}/>
         <Route component={Home} />
       </Switch>
