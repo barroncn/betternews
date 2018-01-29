@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import "./Login.css";
 import Nav from "../../components/Nav";
+import Auth from "../../modules/Auth.js";
+import axios from "axios";
 
 class Login extends Component {
 
@@ -8,42 +11,15 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      errors: {},
-      user: {
-        email: "",
-        password: ""
-      },
+      errors: "",
+      username: "",
+      password: "",
+      message: "",
+      redirect: undefined
     };
 
     this.processUser = this.processUser.bind(this);
   }
-
-  processUser() {
-    const username = encodeURIComponent(this.state.user.username);
-    const password = encodeURIComponent(this.state.user.password);
-    const userData = `username=${username}&password=${password}`;
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("post", "auth/login");
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.responseType = "json";
-    xhr.addEventListener("load", () => {
-      if (xhr.status === 200) {
-        console.log("The form is valid");
-        console.log(xhr);
-        this.setState({ errors: {} });
-      }
-      else {
-        console.log(xhr.response);
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
-
-        this.setState({ errors });
-      }
-    });
-    xhr.send(userData);
-  }
-
 
   handleInputChange = event => {
     let value = event.target.value;
@@ -54,14 +30,38 @@ class Login extends Component {
     });
   };
 
+  processUser() {
+    //AJAX request
+    axios.post("/auth/login", {
+      "username": this.state.username,
+      "password": this.state.password
+    }).then(res => {
+      console.log("RES:");
+      console.log(res);
+      console.log("+++++++++++++++++++++++++++++++++++++++");
+      console.log("TOKEN");
+      console.log(res.data.token);
+      if (!res.data.success) {
+        console.log(res.data);
+      }
+      else {
+        Auth.authenticateUser(res.data.token);
+        this.setState({
+          "errors": {},
+          "redirect": <Redirect to={"/profile/" + res.data.user.userID} />
+        });
+      }
+    });
+  }
+
   handleSubmitClick = event => {
     event.preventDefault();
 
-    if (!this.state.email && !this.state.password) {
+    if (!this.state.username && !this.state.password) {
       this.setState({ message: "Please enter your email and password." });
     }
 
-    else if (!this.state.email) {
+    else if (!this.state.username) {
       this.setState({ message: "Please enter your email." });
     }
 
@@ -70,45 +70,47 @@ class Login extends Component {
     }
 
     else {
+      this.processUser();
       //USER AUTHENTICATION!!!
 
-      this.setState({
-        email: "",
-        password: "",
-        message: ""
-      });
+      // this.setState({
+      //   email: "",
+      //   password: "",
+      //   message: ""
+      // });
     }
   }
 
   render() {
-    return ([
+    return (
+      <div>
       <Nav
         linkOne="/"
         linkOneDisplay="Home"
         linkTwo="/register"
         linkTwoDisplay="Register"
-      />,
+      />
       <div className="loginWrap">
         <br/>
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Login</h4>
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title">Login</h4>
             <form>
               <div className="form-group">
-                <label for="emailInput">Email address</label>
+                <label>Email address</label>
                 <input 
-                  name="email"
+                  name="username"
                   onChange={this.handleInputChange} 
                   type="email" 
                   className="form-control" 
                   id="emailInput"
                   aria-describedby="emailHelp" 
                   placeholder="Enter email" 
-                  value={this.state.email}
+                  value={this.state.username}
                 />
               </div>
               <div className="form-group">
-                <label for="passwordInput">Password</label>
+                <label>Password</label>
                 <input 
                   name="password"
                   onChange={this.handleInputChange} 
@@ -123,7 +125,8 @@ class Login extends Component {
           </div>
         </div>
       </div>
-    ]);
+    </div>
+    );
   }
 }
 

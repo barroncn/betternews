@@ -19,6 +19,8 @@ class Profile extends Component {
         console.log(objID);
         API.getUser(objID)
             .then(res => {
+                console.log("GET USER RES:");
+                console.log(res);
                 this.setState({
                     name: res.name,
                     userState: res.state,
@@ -79,7 +81,7 @@ class Profile extends Component {
                 <Nav
                     linkOne="/savedarticles"
                     linkOneDisplay="Saved Articles"
-                    linkTwo="/"
+                    linkTwo="/logout"
                     linkTwoDisplay="Logout"
                 />
                 <RepDisplay onClick={this.handleChamberChange}>

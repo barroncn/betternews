@@ -87,6 +87,8 @@ export default {
   },
   // Gets the User with the given id
   getUser: function(id) {
+    console.log("ID IN GETUSER (API):");
+    console.log(id);
     return axios({
       method: "get",
       url: "/user/profile/id/" + id,

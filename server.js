@@ -8,8 +8,8 @@ const app = express();
 
 // STATIC ASSETS (served to Heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+    app.use(express.static("client/build"));
+  }
 
 //MIDDLEWARE PASSPORT STRATEGIES
 app.use(passport.initialize());
