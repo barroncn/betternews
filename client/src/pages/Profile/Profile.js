@@ -17,17 +17,29 @@ class Profile extends Component {
         const id = "'" + window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1) + "'";
         const objID = "ObjectId(" + id + ")";
         console.log(objID);
-        API.getUser(objID)
+        this.getUser(objID);
+    }
+
+    getUser = (ID) => {
+        const that = this;
+        API.getUser(ID)
             .then(res => {
-                console.log("GET USER RES:");
+                console.log("GET USER RESULTS: ");
                 console.log(res);
-                this.setState({
-                    name: res.name,
-                    userState: res.state,
-                    zipCode: res.zipCode
-                });
-                this.getStateSen();
-                this.getArticles();
+                that.setState({
+                        name: res.name,
+                        userState: res.state,
+                        zipCode: res.zipCode
+                    }, () => {
+                        that.getStateSen();
+                        that.getArticles();
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                        that.setState({
+                            user: undefined
+                        });
+                    });
             });
     }
 
