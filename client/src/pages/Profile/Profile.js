@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import Nav from "../../components/Nav";
 import RepDisplay from "../../components/RepDisplay";
 import RepCard from "../../components/RepCard";
@@ -89,8 +88,8 @@ class Profile extends Component {
         return ( // ? <Redirect to="/login" /> :
             <div>
                 <Nav
-                    // linkOne = "/savedarticles"
-                    // linkOneDisplay="Saved Articles"
+                    linkOne = "/local"
+                    linkOneDisplay="Local Reps"
                     linkTwo="/logout"
                     linkTwoDisplay="Logout"
                 />

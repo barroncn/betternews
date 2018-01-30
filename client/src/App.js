@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Voting from "./pages/Voting";
 import Profile from "./pages/Profile";
-import SavedArticles from "./pages/SavedArticles";
+//import Local from "./pages/Local";
 import "./App.css";
 
 const App = () =>
@@ -18,7 +18,6 @@ const App = () =>
         <Route path="/details" component={Voting} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route path="/savedarticles" component={SavedArticles} />
         <Route exact path="/logout" render={() => {
               Auth.deauthenticateUser();
               return <Redirect to="/"/>;
