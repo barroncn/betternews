@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/myreps");
 
 //ROUTES
 const routes = require("./routes");
-app.use("/", routes);
+app.use(routes);
 // Send every request to the React app
 app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
