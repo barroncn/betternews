@@ -4,7 +4,6 @@
   "description": "mern app for finding representatives and political news",
   "main": "server.js",
   "scripts": {
-    "start": "PORT=8081 babel-node src/server.js",
     "server": "node server.js",
     "client": "cd client && npm run start",
     "start": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon\" \"npm run client\"",
