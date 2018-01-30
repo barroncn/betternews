@@ -15,7 +15,7 @@ class Home extends Component {
 
     // When the component mounts, call getAllReps function and getArticles function so we can populate the page
     componentDidMount() {
-        //this.newReps();
+        this.newReps();
         this.getAllReps();
         this.getArticles();
     }
