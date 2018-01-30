@@ -38,7 +38,7 @@ const routes = require("./routes");
 app.use("/", routes);
 // Send every request to the React app
 app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/static/index.html"));
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 // //PRINT-EXPRESS-ROUTES
