@@ -89,9 +89,9 @@ class Home extends Component {
                         summary: article.description,
                         date: article.publishedAt
                     })
-                )
+                );
                 // Set the state articles array so the page will be updated
-                this.setState({ articles: articlesArray })
+                this.setState({ articles: articlesArray });
             })
             .catch(err => console.log(err));
     }

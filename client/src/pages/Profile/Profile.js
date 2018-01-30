@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Nav from "../../components/Nav";
 import RepDisplay from "../../components/RepDisplay";
 import RepCard from "../../components/RepCard";
 import ArticleDisplay from "../../components/ArticleDisplay";
 import ArticleCard from "../../components/ArticleCard";
 import API from "../../utils/API";
+import "./Profile.css";
 
 class Profile extends Component {
 
@@ -14,10 +16,8 @@ class Profile extends Component {
     };
 
     componentDidMount() {
-        const id = "'" + window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1) + "'";
-        const objID = "ObjectId(" + id + ")";
-        console.log(objID);
-        this.getUser(objID);
+        this.getUser(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1));
+        this.getArticles();
     }
 
     getUser = (ID) => {
@@ -27,19 +27,16 @@ class Profile extends Component {
                 console.log("GET USER RESULTS: ");
                 console.log(res);
                 that.setState({
-                        name: res.name,
-                        userState: res.state,
-                        zipCode: res.zipCode
-                    }, () => {
-                        that.getStateSen();
-                        that.getArticles();
-                    })
-                    .catch(function(err) {
-                        console.log(err);
-                        that.setState({
-                            user: undefined
-                        });
-                    });
+                    name: res.data.name,
+                    userState: res.data.state,
+                    zipCode: res.data.zipCode
+                }, () => {
+                    that.getStateSen();
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                window.location.assign("/login");
             });
     }
 
@@ -47,6 +44,7 @@ class Profile extends Component {
         const articlesArray = [];
         API.getNewArticles()
             .then(res => {
+                console.log(res);
                 res.data.articles.forEach(article =>
                     articlesArray.push({
                         title: article.title,
@@ -55,9 +53,9 @@ class Profile extends Component {
                         summary: article.description,
                         date: article.publishedAt
                     })
-                )
+                );
                 // Set the state articles array so the page will be updated
-                this.setState({ articles: articlesArray })
+                this.setState({ articles: articlesArray });
             })
             .catch(err => console.log(err));
     }
@@ -88,11 +86,11 @@ class Profile extends Component {
     }
 
     render() {
-        return (
+        return ( // ? <Redirect to="/login" /> :
             <div>
                 <Nav
-                    linkOne="/savedarticles"
-                    linkOneDisplay="Saved Articles"
+                    // linkOne = "/savedarticles"
+                    // linkOneDisplay="Saved Articles"
                     linkTwo="/logout"
                     linkTwoDisplay="Logout"
                 />
@@ -118,8 +116,10 @@ class Profile extends Component {
                         <ArticleCard
                             url={article.url}
                             title={article.title}
-                            summary={article.synopsis}
+                            summary={article.summary}
                             date={article.date}
+                            photo={article.photo}
+                            key={article.url}
                         />
                     ))}
                 </ArticleDisplay>

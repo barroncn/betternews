@@ -1,0 +1,72 @@
+router                                                                                                         
+ ├── query                                         *                                                           
+ ├── expressInit                                   *                                                           
+ ├── logger                                        *                                                           
+ ├── initialize                                    *                                                           
+ ├── <anonymous>                                   /^\/user\/?(?=\/|$)/                                        
+ ├── urlencodedParser                              *                                                           
+ ├── textParser                                    *                                                           
+ ├── jsonParser                                    *                                                           
+ ├── jsonParser                                    *                                                           
+ └── router                                        *                                                           
+     router                                                                                                    
+      ├── router                                   /^\/user\/?(?=\/|$)/                                        
+      │   router                                                                                               
+      │    └── router                              /^\/profile\/?(?=\/|$)/                                     
+      │        router                                                                                          
+      │         └── bound dispatch                 /id/:id                                                     GET, PUT, DELETE
+      │              ├── findOne                   /                                                           GET
+      │              ├── update                    /                                                           PUT
+      │              └── remove                    /                                                           DELETE
+      │             
+      │        
+      │   
+      ├── router                                   /^\/api\/?(?=\/|$)/                                         
+      │   router                                                                                               
+      │    ├── router                              /^\/articles\/?(?=\/|$)/                                    
+      │    │   router                                                                                          
+      │    │    ├── bound dispatch                 /                                                           GET, POST
+      │    │    │    ├── findAll                   /                                                           GET
+      │    │    │    └── create                    /                                                           POST
+      │    │    │   
+      │    │    └── bound dispatch                 /:id                                                        GET, PUT, DELETE
+      │    │         ├── findById                  /                                                           GET
+      │    │         ├── update                    /                                                           PUT
+      │    │         └── remove                    /                                                           DELETE
+      │    │        
+      │    │   
+      │    ├── router                              /^\/reps\/?(?=\/|$)/                                        
+      │    │   router                                                                                          
+      │    │    ├── bound dispatch                 /                                                           GET, POST
+      │    │    │    ├── findAll                   /                                                           GET
+      │    │    │    └── create                    /                                                           POST
+      │    │    │   
+      │    │    ├── bound dispatch                 /chamber/:chamber                                           GET
+      │    │    │    └── findByChamber             /                                                           GET
+      │    │    │   
+      │    │    ├── bound dispatch                 /details/:id                                                GET, PUT, DELETE
+      │    │    │    ├── findById                  /                                                           GET
+      │    │    │    ├── update                    /                                                           PUT
+      │    │    │    └── remove                    /                                                           DELETE
+      │    │    │   
+      │    │    └── bound dispatch                 /:reptype/:state                                            GET
+      │    │         └── findRepsbyState           /                                                           GET
+      │    │        
+      │    │   
+      │    └── router                              /^\/user\/?(?=\/|$)/                                        
+      │        router                                                                                          
+      │         └── bound dispatch                 /                                                           POST
+      │              └── create                    /                                                           POST
+      │             
+      │        
+      │   
+      └── router                                   /^\/auth\/?(?=\/|$)/                                        
+          router                                                                                               
+           └── router                              /^\/login\/?(?=\/|$)/                                       
+               router                                                                                          
+                └── bound dispatch                 /                                                           POST
+                     └── <anonymous>               /                                                           POST
+                    
+               
+          
+     

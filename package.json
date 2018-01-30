@@ -4,6 +4,7 @@
   "description": "mern app for finding representatives and political news",
   "main": "server.js",
   "scripts": {
+    "start": "PORT=8081 babel-node src/server.js",
     "server": "node server.js",
     "client": "cd client && npm run start",
     "start": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon\" \"npm run client\"",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^3.5.0",
+    "express-print-routes": "^1.0.0",
     "nodemon": "^1.11.0"
   },
   "dependencies": {

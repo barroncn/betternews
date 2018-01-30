@@ -52,7 +52,7 @@ class Register extends Component {
       "username": this.state.username,
       "password": this.state.password
     }).then(res => {
-      if (!res.data.sucess) {
+      if (!res.data.success) {
         console.log("FAILURE");
         console.log(res.data);
       }
