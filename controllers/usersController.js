@@ -10,9 +10,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    console.log("-----------------------------------------------------------------------------------------");
-    console.log("REQUEST IN USERSCONTROLLER:");
-    console.log(req);
     db.Users
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))

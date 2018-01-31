@@ -17,7 +17,7 @@ class Register extends Component {
       password: "",
       name: "",
       confirmPassword: "",
-      userState: "", //"Select Your State",
+      userState: "",
       zip: "",
       message: "",
       redirect: undefined
@@ -26,12 +26,14 @@ class Register extends Component {
     this.processUser = this.processUser.bind(this);
   }
 
+  //Ensures the user's input matches the format of an email address
   validateEmail(email) {
     // eslint-disable-next-line
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.toLowerCase());
   }
 
+  //Updates the DOM with the user's input
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
@@ -41,72 +43,45 @@ class Register extends Component {
     });
   }
 
-  //sends our register user request through authorization
+  //sends our register user request through authendication
   processUser(userID) {
-    // const username = encodeURIComponent(this.state.username);
-    // const password = encodeURIComponent(this.state.password);
-    // const userData = `username=${username}&password=${password}`;
-
-    //AJAX request
+    //Axios request to /auth/login route
     axios.post("/auth/login", {
       "username": this.state.username,
       "password": this.state.password
     }).then(res => {
+      //if the request fails, console log the failure
       if (!res.data.success) {
         console.log("FAILURE");
         console.log(res.data);
       }
+      //if the request succeeds, then redirect the user to their profile page
       else {
-        console.log("RES:");
-        console.log(res);
-        console.log("+++++++++++++++++++++++++++++++++++++++");
-        console.log("TOKEN");
-        console.log(res.data.token);
         Auth.authenticateUser(res.data.token);
         this.setState({
           "errors": {},
           "redirect": <Redirect to={"/profile/" + userID} />
         });
       }
-    });
-    // const xhr = new XMLHttpRequest();
-    // xhr.open("post", "/auth/login");
-    // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xhr.responseType = "json";
-    // xhr.addEventListener("load", () => {
-    //   if (xhr.status === 200) { //if successful
-    //     this.setState({ errors: {} }); //set error state to no errors
-    //     console.log(xhr);
-    //     Auth.authenticateUser(xhr.response.token);
-    //     console.log("The form is valid");
-    //     this.setState({ redirect: <Redirect to={"/profile/" + userID} /> }); //Redirect the user to their profile
-    //   }
-    //   else { //if the request failed
-    //     console.log(xhr.response);
-    //     const errors = xhr.response.errors ? xhr.response.errors : {};
-    //     errors.summary = xhr.response.message;
-
-    //     this.setState({ errors }); // set error state to either the xhr response errors or leave empty
-    //   }
-    // });
-    // xhr.send(userData);
+    }).catch(err => console.log(err));
   }
 
+  //When the user submits the register form
   handleSubmitClick = (event) => {
     event.preventDefault();
-
+    //Check to make sure no fields are blank
     if (!this.state.name || !this.state.username || !this.state.password || !this.state.userState || !this.state.zip) {
       this.setState({ message: "Please complete all fields." });
     }
-
+    //make sure the email matches the email format by calling the validateEmail function
     else if (!this.validateEmail(this.state.username)) {
       this.setState({ message: "Please enter a valid email address." });
     }
-
+    //make sure the password is at least six characters long
     else if (this.state.password.length < 6) {
       this.setState({ message: "Password must be at least six characters long." });
     }
-
+    //make sure the password and confirm password match
     else if (this.state.password !== this.state.confirmPassword) {
       console.log(this.state.password);
       console.log(this.state.confirmPassword);
@@ -116,11 +91,11 @@ class Register extends Component {
         message: "Passwords do not match."
       });
     }
-
+    //make sure the zip Code is 5 characters long
     else if (this.state.zip.length !== 5) {
       this.setState({ message: "Please enter a five digit zip code." });
     }
-
+    //If the form is validated.
     else {
       const newUser = {
         name: this.state.name,
@@ -129,31 +104,18 @@ class Register extends Component {
         state: this.state.userState,
         zipCode: this.state.zip
       };
+      //Add the user to the Users database
       API.saveUser(newUser)
         .then(res => {
-          console.log(res.data);
+          //if Mongoose returns an error code 11000, then the user email is already in the database
           if (res.data.code === 11000) {
             this.setState({ message: "This email is already registered." });
           }
+          //otherwise, authentiate the user (which upon successful authentiation will send them to their 
+          //new profile page)
           else {
             this.processUser(res.data._id.valueOf());
-            //ObjectId("507c7f79bcf86cd7994f6c0e").valueOf()
-            // // Reset the form
-            // this.setState({
-            //   error: "",
-            //   name: "",
-            //   username: "",
-            //   password: "",
-            //   confirmPassword: "",
-            //   userState: "",
-            //   zip: "",
-            //   message: ""
-            // });
-            // return res.redirect('/profile/' + req.user._id);
-            // });
           }
-
-
         })
         .catch(err => console.log(err));
     }
@@ -183,8 +145,7 @@ class Register extends Component {
                     type="input" 
                     className="form-control" 
                     id="userName" 
-                    aria-describedby="emailHelp" 
-                    //placeholder="Enter Name" 
+                    aria-describedby="emailHelp"  
                     value={this.state.name}  
                   />
                 </div>
@@ -197,7 +158,6 @@ class Register extends Component {
                     className="form-control" 
                     id="emailInput" 
                     aria-describedby="emailHelp" 
-                    //placeholder="Enter email" 
                     value={this.state.username}  
                   />
                 </div>
@@ -208,8 +168,7 @@ class Register extends Component {
                     onChange={this.handleInputChange}
                     type="password" 
                     className="form-control" 
-                    id="passwordInput" 
-                    //placeholder="Enter Password" 
+                    id="passwordInput"  
                     value={this.state.password}
                   />
                 </div>
@@ -221,7 +180,6 @@ class Register extends Component {
                     type="password" 
                     className="form-control" 
                     id="passwordConfirm" 
-                    //placeholder="Confirm Password" 
                     value={this.state.confirmPassword}
                   />
                 </div>
@@ -294,8 +252,7 @@ class Register extends Component {
                     onChange={this.handleInputChange}
                     type="text" 
                     className="form-control" 
-                    id="inputZip" 
-                    //placeholder="Enter Zip Code" 
+                    id="inputZip"  
                     value={this.state.zip}
                   />
                 </div>

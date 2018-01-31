@@ -21,6 +21,7 @@ class Login extends Component {
     this.processUser = this.processUser.bind(this);
   }
 
+  //Update the DOM to reflect the user's input
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
@@ -30,24 +31,20 @@ class Login extends Component {
     });
   };
 
+  //Authenticate the user
   processUser() {
-    //AJAX request
+    //Axios request to authenticate the user
     axios.post("/auth/login", {
       "username": this.state.username,
       "password": this.state.password
     }).then(res => {
+      //If the user is not authenticated, display an incorrect credentials message
       if (!res.data.success) {
-        console.log("ERROR:");
-        console.log(res.data);
-        this.setState({ message: "Incorrect Username or Password." })
+        this.setState({ message: "Incorrect Username or Password." });
       }
+      //If the user is authenticated, call the authenticate user Auth function to save a token in local storage
+      //and redirect them to their profile page
       else {
-        console.log("RES:");
-        console.log(res);
-        console.log("+++++++++++++++++++++++++++++++++++++++");
-        console.log("TOKEN");
-        console.log(res.data.token);
-        console.log("REDIRECT ID: " + res.data.user.userID);
         Auth.authenticateUser(res.data.token);
         this.setState({
           "errors": {},
@@ -57,30 +54,24 @@ class Login extends Component {
     });
   }
 
+  //When the user submits the login form
   handleSubmitClick = event => {
     event.preventDefault();
-
+    //Make sure they haven't left both fields blank, and display appropriate message if they have
     if (!this.state.username && !this.state.password) {
       this.setState({ message: "Please enter your email and password." });
     }
-
+    //If they only left username blank, instruct them to enter their email
     else if (!this.state.username) {
       this.setState({ message: "Please enter your email." });
     }
-
+    //if they have left the password blank, instruct them to enter their password
     else if (!this.state.password) {
       this.setState({ message: "Please enter your password." });
     }
-
+    //if they filled out each section, then process the form
     else {
       this.processUser();
-      //USER AUTHENTICATION!!!
-
-      // this.setState({
-      //   email: "",
-      //   password: "",
-      //   message: ""
-      // });
     }
   }
 

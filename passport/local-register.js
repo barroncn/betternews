@@ -7,7 +7,5 @@ module.exports = new PassportLocalStrategy({
     session: false,
     passReqToCallback: true
 }, (req, username, password, done) => {
-    console.log("PASSPORT LOCAL STRATEGY REQUEST: --------------------------------");
-    console.log(req);
     return done(null);
 });

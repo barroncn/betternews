@@ -14,31 +14,36 @@ class Profile extends Component {
         articles: []
     };
 
+    //When the component mounts, call the getUser function with the database id from the URL as an argument
+    //Also get the most resent 10 articles from NewsAPI
     componentDidMount() {
         this.getUser(window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1));
         this.getArticles();
     }
 
+    //Returns the name, state, and zip code of the user and sets the state of each of these to the appropriate value
     getUser = (ID) => {
         const that = this;
         API.getUser(ID)
             .then(res => {
-                console.log("GET USER RESULTS: ");
-                console.log(res);
                 that.setState({
                     name: res.data.name,
                     userState: res.data.state,
                     zipCode: res.data.zipCode
                 }, () => {
+                    //Once the user's information has been updated, get display the Senators from the user's State
                     that.getStateSen();
                 });
             })
             .catch(err => {
+                //If there is an error with user authentication (ie the user is not logged in), send the user
+                //to the login page
                 console.log(err);
                 window.location.assign("/login");
             });
     }
 
+    //Go to the NewsAPI to get recent articles and push them into the articles array
     getArticles() {
         const articlesArray = [];
         API.getNewArticles()
@@ -59,6 +64,7 @@ class Profile extends Component {
             .catch(err => console.log(err));
     }
 
+    //Get only the senators from the users state from the database
     getStateSen() {
         API.getStateReps("Senator,", this.state.userState)
             .then(res =>
@@ -67,6 +73,7 @@ class Profile extends Component {
             .catch(err => console.log(err));
     }
 
+    //Get only the house representatives from the users state from the databse
     getStateRep() {
         API.getStateReps("Representative", this.state.userState)
             .then(res =>
@@ -75,6 +82,7 @@ class Profile extends Component {
             .catch(err => console.log(err));
     }
 
+    //Display the appropriate reps based on the button the user has clicked
     handleChamberChange = name => {
         if (name === "Senator,") {
             this.getStateSen();
@@ -85,7 +93,7 @@ class Profile extends Component {
     }
 
     render() {
-        return ( // ? <Redirect to="/login" /> :
+        return (
             <div>
                 <Nav
                     linkOne = "/local"

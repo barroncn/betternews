@@ -3,6 +3,7 @@ import Auth from "../modules/Auth.js";
 const authHeader = () => ({ "Authorization": `bearer ${Auth.getToken()}` });
 
 export default {
+
   //ARTICLES=====================================================================================================================
   // Gets all Articles from database
   getArticles: function() {
@@ -12,11 +13,11 @@ export default {
   getArticle: function(id) {
     return axios.get("/api/articles/" + id);
   },
-  // Deletes the book with the given id
+  // Deletes the article with the given id
   deleteArticle: function(id) {
     return axios.delete("/api/articles/" + id);
   },
-  // Saves a book to the database
+  // Saves an article to the database
   saveArticle: function(articleData) {
     return axios.post("/api/articles", articleData);
   },
@@ -70,7 +71,6 @@ export default {
 
     return axios.get("https://api.propublica.org/congress/v1/members/" + id + "/votes.json", config);
   },
-
   // Gets all Reps by State from database
   getStateReps: function(reptype, state) {
     return axios.get("/api/reps/" + reptype + "/" + state);

@@ -67,7 +67,6 @@ class Home extends Component {
                 />
                 <br/>
                 <div className="voteWrapper">
-                
                     <div className="theVotes">
                     <h2 className="articleHeader">{this.state.firstName + " " + this.state.lastName}'s Votes</h2>
                         <div className="text-center">

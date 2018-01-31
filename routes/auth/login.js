@@ -6,11 +6,7 @@ const router = new express.Router();
 //matches route "auth/login"
 router.post("/", (req, res, next) => {
     return passport.authenticate("local-login", (err, token, userData) => {
-        console.log("USER DATA:");
-        console.log(userData);
-        console.log("----------------------------------------");
-        console.log("TOKEN");
-        console.log(token);
+
         if (err) {
             if (err.name === "IncorrectCredentialError") {
                 return res.json({
