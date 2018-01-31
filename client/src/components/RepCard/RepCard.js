@@ -4,13 +4,13 @@ import "./RepCard.css";
 const RepCard = props =>
 
   <div className="card rep text-center">
-            <a href={props.website}><img className="card-img-top crop" src={props.picture} alt="Representative Headshot"/></a>
+            <a href={(!props.website) ? "" : props.website}><img className="card-img-top crop" src={props.picture} alt="Representative Headshot"/></a>
             <div className="rep-card-body card-body">
               <p className="repName font-weight-bold">{props.firstName} {props.lastName}</p>
               <p className="card-text">{props.repState} - {props.party}</p>
               <p>
                 <a href={props.website} target="_blank" className="card-title font-weight-bold"> 
-                  <i className="fa fa-id-card-o fa-lg" aria-hidden="true" data-toggle="tooltip" title="Website" tabindex="0" data-placement="top"></i>
+                  {(!props.website) ? " " : <i className="fa fa-id-card-o fa-lg" aria-hidden="true" data-toggle="tooltip" title="Website" tabindex="0" data-placement="top"></i>}
                 </a>
                 <a href={props.contact} target="_blank" className="card-text">
                   {(!props.contact) ? " " : <i className="fa fa-envelope-o fa-lg" aria-hidden="true" data-toggle="tooltip" title="Contact Form" tabindex="0" data-placement="top"></i>} 
