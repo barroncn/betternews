@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Nav from "../../components/Nav";
 import RepDisplay from "../../components/RepDisplay";
 import RepCard from "../../components/RepCard";
@@ -11,7 +12,8 @@ class Profile extends Component {
 
     state = {
         representatives: [],
-        articles: []
+        articles: [],
+        authorized: ""
     };
 
     //When the component mounts, call the getUser function with the database id from the URL as an argument
@@ -39,7 +41,7 @@ class Profile extends Component {
                 //If there is an error with user authentication (ie the user is not logged in), send the user
                 //to the login page
                 console.log(err);
-                window.location.assign("/login");
+                this.setState({ authorized: "NO" });
             });
     }
 
@@ -94,6 +96,7 @@ class Profile extends Component {
 
     render() {
         return (
+            this.state.authorized === "NO" ? <Redirect to="/login" /> :
             <div>
                 <Nav
                     linkOne = "/local"

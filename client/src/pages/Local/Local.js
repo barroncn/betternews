@@ -1,27 +1,35 @@
 import React, { Component } from "react";
 import Nav from "../../components/Nav";
-import ArticleDisplay from "../../components/ArticleDisplay";
-import ArticleCard from "../../components/ArticleCard";
+import Auth from "../../modules/Auth.js";
+import { Redirect } from "react-router-dom";
+import "./Local.css";
 
-class SavedArticles extends Component {
+class Local extends Component {
 
-    state = {};
+    state = {
+        user: undefined
+    };
+
+    componentDidMount() {
+        this.setState({ user: Auth.getUser() });
+    }
 
     render() {
         return (
+            // !this.state.user ? <Redirect to="/login" /> :
             <div>
                 <Nav
-                    linkOne="/profile"
+                    linkOne={"/profile/" + this.state.user}
                     linkOneDisplay="Profile"
-                    linkTwo="/"
+                    linkTwo="/logout"
                     linkTwoDisplay="Logout"
                 />
-                <br/>
-                <ArticleDisplay>
-                </ArticleDisplay>
+                <h2 className="notification">
+                    Local Representatives...coming soon! <i class="fa fa-cogs fa-lg"></i>
+                </h2>
             </div>
         );
     }
 }
 
-export default SavedArticles;
+export default Local;

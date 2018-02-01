@@ -4,7 +4,7 @@ import "./RepCard.css";
 const RepCard = props =>
 
   <div className="card rep text-center">
-            <a href={(!props.website) ? "" : props.website}><img className="card-img-top crop" src={props.picture} alt="Representative Headshot"/></a>
+            <a href={(!props.website) ? "" : props.website} target="_blank"><img className="card-img-top crop" src={props.picture} alt="Representative Headshot"/></a>
             <div className="rep-card-body card-body">
               <p className="repName font-weight-bold">{props.firstName} {props.lastName}</p>
               <p className="card-text">{props.repState} - {props.party}</p>

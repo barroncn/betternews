@@ -9,9 +9,9 @@ const app = express();
 app.use(logger("dev"));
 
 // STATIC ASSETS (served to Heroku)
-//if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
 app.use(express.static("client/build"));
-//}
+// }
 
 //MIDDLEWARE PASSPORT STRATEGIES
 app.use(passport.initialize());
@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/myreps");
 //ROUTES
 const routes = require("./routes");
 app.use(routes);
-// Send every request to the React app
+Send every request to the React app
 app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
