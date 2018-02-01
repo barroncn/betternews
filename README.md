@@ -1,6 +1,6 @@
 # My Reps
 
-*Under Construction but...*
+*Still under Construction but...*
 
 [You can check out what's been done so far right here!](https://cryptic-lowlands-94172.herokuapp.com)  
 
