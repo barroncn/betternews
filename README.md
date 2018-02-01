@@ -1,6 +1,8 @@
 # My Reps
 
-[Check it out here!](https://cryptic-lowlands-94172.herokuapp.com)  
+##Under Construction but...
+
+[You can check out what's been done so far right here!](https://cryptic-lowlands-94172.herokuapp.com)  
 
 * Sample User Email: *email@email.com*
 
@@ -10,7 +12,7 @@ This app provides information about the members of congress: recent votes, websi
 
 **Future Development**
 
-If you visit the site you'll see that the structure and some of the content are there but there's more to be done. When users log in there will be a page that displays local leader information based on the location information with which the user registered. Hopefully this will be up in the next couple days!
+If you visit the site you'll see the structure is there with some of the content and that user authentication is in place, but there's more to be done! When users log in there will be a page that displays local leader information based on the location information with which the user registered. Hopefully this will be up in the next couple days!
 
 
 
