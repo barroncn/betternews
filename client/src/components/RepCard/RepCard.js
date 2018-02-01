@@ -15,7 +15,7 @@ const RepCard = props =>
                 <a href={props.contact} target="_blank" className="card-text">
                   {(!props.contact) ? " " : <i className="fa fa-envelope-o fa-lg" aria-hidden="true" data-toggle="tooltip" title="Contact Form" tabindex="0" data-placement="top"></i>} 
                 </a>
-                <a href={"/details/" + props.apiID} className="card-title font-weight-bold"> 
+                <a href={"/details/" + props.apiID} target="_blank" className="card-title font-weight-bold"> 
                   <i className="fa fa-chevron-circle-down fa-lg" aria-hidden="true" data-toggle="tooltip" title="Recent Votes" tabindex="0" data-placement="top"></i>
                 </a>
               </p>
