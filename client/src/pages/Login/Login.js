@@ -45,7 +45,7 @@ class Login extends Component {
       //If the user is authenticated, call the authenticate user Auth function to save a token in local storage
       //and redirect them to their profile page
       else {
-        Auth.authenticateUser(res.data.token);
+        Auth.authenticateUser(res.data.token, res.data.user.userID);
         this.setState({
           "errors": {},
           "redirect": <Redirect to={"/profile/" + res.data.user.userID} />

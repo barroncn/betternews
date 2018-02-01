@@ -57,7 +57,7 @@ class Register extends Component {
       }
       //if the request succeeds, then redirect the user to their profile page
       else {
-        Auth.authenticateUser(res.data.token);
+        Auth.authenticateUser(res.data.token, userID);
         this.setState({
           "errors": {},
           "redirect": <Redirect to={"/profile/" + userID} />

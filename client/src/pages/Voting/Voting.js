@@ -3,11 +3,13 @@ import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import Vote from "../../components/Vote";
 import "./Voting.css";
+import Auth from "../../modules/Auth.js";
 
 class Home extends Component {
 
     state = {
-        votes: []
+        votes: [],
+        user: undefined
     };
 
     // When the component mounts call getVoteRecord() to get the voting record from the ProPublica API 
@@ -15,6 +17,7 @@ class Home extends Component {
     componentDidMount() {
         this.getVoteRecord();
         this.getRepInfo();
+        this.setState({ user: Auth.getUser() });
     }
 
     // getVoteRecord() gets the votes listed in the ProPublica API
@@ -62,6 +65,8 @@ class Home extends Component {
         return (
             <div>
                 <Nav
+                    linkOne={ this.state.user ? "/profile/" + this.state.user : ""}
+                    linkOneDisplay={ this.state.user ? "Profile" : ""}
                     linkTwo="/"
                     linkTwoDisplay="Home"
                 />

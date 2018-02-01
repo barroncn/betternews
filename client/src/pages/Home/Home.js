@@ -5,12 +5,14 @@ import RepCard from "../../components/RepCard";
 import ArticleDisplay from "../../components/ArticleDisplay";
 import ArticleCard from "../../components/ArticleCard";
 import API from "../../utils/API";
+import Auth from "../../modules/Auth.js";
 
 class Home extends Component {
 
     state = {
         representatives: [],
-        articles: []
+        articles: [],
+        user: undefined
     };
 
     // When the component mounts, call getAllReps function and getArticles function so we can populate the page
@@ -18,6 +20,8 @@ class Home extends Component {
         //this.newReps();
         this.getAllReps();
         this.getArticles();
+        this.setState({ user: Auth.getUser() });
+
     }
 
     // This function gets all the reps from the database (both senators and house representatives)
@@ -110,10 +114,10 @@ class Home extends Component {
         return (
             <div>
                 <Nav
-                    linkOne="/login"
-                    linkOneDisplay="Login"
-                    linkTwo="/register"
-                    linkTwoDisplay="Register"
+                    linkOne={ this.state.user ? "/profile/" + this.state.user : "/login"}
+                    linkOneDisplay={ this.state.user ? "Profile" : "Login"}
+                    linkTwo={ this.state.user ? "/logout" : "/register" }
+                    linkTwoDisplay={ this.state.user ? "Logout" : "Register" }
                 />
                 <RepDisplay onClick={this.handleChamberChange}>
                     {this.state.representatives.map( rep => ( //Makes an RepCard for each representative in the states representatives array
