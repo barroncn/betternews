@@ -9,9 +9,9 @@ const app = express();
 app.use(logger("dev"));
 
 // STATIC ASSETS (served to Heroku)
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-}
+//if (process.env.NODE_ENV === "production") {
+app.use(express.static("client/build"));
+//}
 
 //MIDDLEWARE PASSPORT STRATEGIES
 app.use(passport.initialize());
@@ -38,9 +38,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/myreps");
 const routes = require("./routes");
 app.use(routes);
 //Send every request to the React app
-// app.get("*", function(req, res) {
-//     res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 // //PRINT-EXPRESS-ROUTES
 // // Absolute path to output file 
@@ -51,7 +51,7 @@ app.use(routes);
 
 
 //START SERVER
-const PORT = 8081 //process.env.PORT || 8081;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, function() {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
