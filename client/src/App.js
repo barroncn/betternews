@@ -18,7 +18,7 @@ const App = () =>
         <Route path="/details" component={Voting} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/local" component={Local} />
+        <Route path="/local" component={Local} />
         <Route exact path="/logout" render={() => {
               Auth.deauthenticateUser();
               return <Redirect to="/"/>;

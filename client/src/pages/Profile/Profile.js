@@ -31,7 +31,8 @@ class Profile extends Component {
                 that.setState({
                     name: res.data.name,
                     userState: res.data.state,
-                    zipCode: res.data.zipCode
+                    zipCode: res.data.zipCode,
+                    userID: ID
                 }, () => {
                     //Once the user's information has been updated, get display the Senators from the user's State
                     that.getStateSen();
@@ -99,7 +100,7 @@ class Profile extends Component {
             this.state.authorized === "NO" ? <Redirect to="/login" /> :
             <div>
                 <Nav
-                    linkOne = "/local"
+                    linkOne = {"/local/" + this.state.userID}
                     linkOneDisplay="Local Reps"
                     linkTwo="/logout"
                     linkTwoDisplay="Logout"

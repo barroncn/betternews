@@ -75,6 +75,12 @@ export default {
   getStateReps: function(reptype, state) {
     return axios.get("/api/reps/" + reptype + "/" + state);
   },
+  getLocalReps: function(userZIP) {
+    // var config = {
+    //   headers: { 'X-API-Key': 'AIzaSyDRheG7K1TeiA3RBnsiEHqeapQ5_5J5MDc' }
+    // };
+    return axios.get("https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDRheG7K1TeiA3RBnsiEHqeapQ5_5J5MDc&address=" + userZIP);
+  },
 
   //USERS=====================================================================================================================
   // Gets all Users from database
