@@ -27,7 +27,7 @@ class Local extends Component {
                     zipCode: res.data.zipCode,
                     userID: ID
                 }, () => {
-                    //Once the user's information has been updated, get display the local representatives
+                    //Once the user's information has been updated, display the local representatives data in console
                     API.getLocalReps(this.state.zipCode)
                         .then(res => {
                             console.log("LOCAL REPS RESULTS----------------------------------------------")
