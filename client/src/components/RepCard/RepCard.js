@@ -16,7 +16,7 @@ const RepCard = props =>
                   {(!props.contact) ? " " : <i className="fa fa-envelope-o fa-lg" aria-hidden="true" data-toggle="tooltip" title="Contact Form" tabIndex="0" data-placement="top"></i>} 
                 </a>
                 <a href={"/details/" + props.apiID} className="card-title font-weight-bold"> 
-                  <i className="fa fa-chevron-circle-down fa-lg" aria-hidden="true" data-toggle="tooltip" title="Recent Votes" tabIndex="0" data-placement="top"></i>
+                  {(!props.apiID) ? " " :<i className="fa fa-chevron-circle-down fa-lg" aria-hidden="true" data-toggle="tooltip" title="Recent Votes" tabIndex="0" data-placement="top"></i>}
                 </a>
               </p>
               <p className="card-text">{props.phone}</p>
