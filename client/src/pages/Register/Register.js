@@ -130,7 +130,7 @@ class Register extends Component {
           linkOneDisplay="Home"
           linkTwo="/login"
           linkTwoDisplay="Login"
-        />,
+        />
       <div className="loginWrap">
           <br/>
           <div className="card">
