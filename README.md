@@ -4,9 +4,9 @@
 
 [You can check out what's been done so far right here!](https://cryptic-lowlands-94172.herokuapp.com)  
 
-* Sample User Email: *email@email.com*
+* Sample User Email: ```email@email.com```
 
-* Password: *password*
+* Password: ```password```
 
 This app provides information about members of congress: recent votes, websites, and contact information. The most recent news articles from Politico news (obtained through NewsAPI) are also displayed. The goal is that people don't tune out politics because information is hard to find. Maybe you're frustrated with the way things are going. Maybe you're annoyed with how little your opinion seems to matter. Maybe you're happy with how everything is going. No matter how you feel, stay informed! Let your representatives know that you have a voice!
 
